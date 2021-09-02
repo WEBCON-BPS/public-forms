@@ -1,0 +1,106 @@
+﻿@model WEBCON.FormsGenerator.Presentation.ViewModels.FormContentPreviewViewModel
+@{ Layout = null; }
+@{ ViewData["Title"] = "Form preview"; }
+@inject Microsoft.AspNetCore.Antiforgery.IAntiforgery Xsrf
+@functions{ public string GetAntiXsrfRequestToken()
+    {
+        return Xsrf.GetAndStoreTokens(Context).RequestToken;
+    }
+    public string SetCaptcha(string body)
+    {
+        var bodySplit = body.Split("<").ToList();
+        var submitLine = bodySplit.FindIndex(x => x.Contains("submit"));
+        bodySplit.Insert(submitLine - 1, @$"div id=""recaptcha"" class=""g-recaptcha"" data-sitekey=""{Model.CaptchaKey}"" data-callback="""" data-size=""invisible""></div>");
+        var joinedBody = string.Join("<", bodySplit);
+
+        return joinedBody;
+    }
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/lib/jquery-datetimepicker/jquery.datetimepicker.min.css" />
+    <link rel="stylesheet" href="~/lib/fontawesome/css/fontawesome.min.css" />
+    <link rel="stylesheet" href="~/lib/fontawesome/css/solid.min.css" />
+    <script src="~/lib/jquery/jquery.min.js"></script>
+    <script src="~/lib/jquery-validation/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+    <script src="~/lib/moment.js/moment.js"></script>
+    <script src="~/lib/jquery-datetimepicker/jquery.datetimepicker.full.min.js"></script>
+    <script src="~/js/formContentPreview.js"></script>
+    <link href="~/css/form.css" rel="stylesheet" />
+    @if (Model.UseStandardBootstrapStyle == true)
+    {
+        <script>
+            $(document).ready(function () {
+                $("input[type=text],textarea, select, input[type=date],input[type=datetime],input[type=datetime-local], input[type=number], input[type=email]").addClass("form-control").parent().addClass("form-group");
+                $("fieldset input[type=checkbox], input[type=radio]").addClass("form-check-input").parent().removeClass("form-group").addClass("form-check");
+                $("input[type=radio]").parent().addClass("form-check-inline");
+                $(".form-control, .form-check").addClass("mt-1");
+                $(".form-check label").addClass("form-check-label");
+                $("form input[type=submit]").addClass("mt-2 btn btn-secondary");
+            });
+        </script>
+    }
+    @if (!Model.IsActive)
+    {
+        <style>
+            html, body {
+                height: 100%
+            }
+        </style>
+    }
+    @if (Model.CustomCssLink != null || Model.CustomCssLink != "")
+    {
+        <link href="@Model.CustomCssLink" rel="stylesheet" />
+    }
+    @if (Model.IsCaptchaRequired)
+    {
+        <script src="https://www.google.com/recaptcha/api.js"></script>
+        Model.Html = SetCaptcha(Model.Html);
+    }
+    @if (Model.CustomCss != null || Model.CustomCss != "")
+    {
+        <style>
+            @Model.CustomCss
+        </style>
+    }
+    @if (Model.IsReadonly)
+    {
+        <style>
+            body {
+                pointer-events: none;
+            }
+        </style>
+    }
+</head>
+<body>
+    @if (!Model.IsActive)
+    {
+        <div class="h-100 row align-items-center text-center">
+            <div class="col">
+                <img src="~/img/logo-black2.png" />
+                <h5 class="mt-2">No preview available. Form is inactive.</h5>
+            </div>
+        </div>
+    }
+    else
+    {
+        <div class="container">
+            <div>
+                @Html.Raw(Model.Html?.Replace("\r\n", "")
+               .Replace("</form>", @$"<input id=""formGuid"" name=""formGuid"" type=""hidden"" value=""{Model.FormGuid}"" /></form>")
+               .Replace("</form>", @"<input type=""hidden"" id=""RequestVerificationToken"" name=""__RequestVerificationToken"" value=" + @GetAntiXsrfRequestToken() + "></form>"))
+            </div>
+            <p id="SubmitProcessing" hidden>@Model.ContentSubmitProcessingText</p>
+            <p class="text-success font-weight-bold" id="SubmitSuccess"></p>
+            <p class="text-danger font-weight-bold" id="SubmitErrors"></p>
+            @Html.HiddenFor(x => x.ContentSubmitSuccessMessage)
+            @Html.HiddenFor(x => x.IsCaptchaRequired)
+        </div>
+    }
+</body>
+</html>

@@ -1,0 +1,105 @@
+﻿@using Microsoft.AspNetCore.Mvc.Localization
+@model WEBCON.FormsGenerator.BusinessLogic.Domain.Interface.IPagedList<WEBCON.FormsGenerator.BusinessLogic.Domain.Model.Form>
+@{
+    ViewData["Title"] = "Forms list";
+}
+@inject IViewLocalizer Localizer
+<div class="container-fluid">
+    <div class="mb-3"><h4>@Localizer["Welcome"]</h4></div>
+    <div class="d-flex flex-column flex-lg-row justify-content-between w-100 pb-3">
+        <div><a asp-action="Create" asp-controller="Form" class="btn btn-secondary btn-sm"><i class="fas fa-plus"></i> @Localizer["Add"]</a></div>
+        <div class="text-left">
+            <form asp-action="Index" method="get" class="d-flex flex-column flex-lg-row float-lg-right mb-3">
+                <div class="col-form-label">@Localizer["Find by name"]</div>
+                <div class="d-flex flex-row">
+                    <input type="search" class="form-control mr-sm-2 ml-sm-2" name="SearchString" placeholder="@Localizer["Search"]" aria-label="Search" value="@ViewData["CurrentFilter"]" />
+                    <button type="submit" class="btn btn-secondary btn-sm"><i class="fas fa-search"></i></button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <p class="text-danger">@ViewData["Error"]</p>
+    <table class="table table-hover table-responsive-sm">
+        <thead>
+            <tr>
+                <th>
+                    Id
+                </th>
+                <th>
+                    <a asp-action="Index" asp-route-sortOrder="@ViewData["NameSortParm"]" asp-route-currentFilter="@ViewData["CurrentFilter"]">@Localizer["Name"] <i class="fas fa-sort"></i></a>
+                </th>
+                <th>
+                    <a asp-action="Index" asp-route-sortOrder="@ViewData["DateSortParm"]" asp-route-currentFilter="@ViewData["CurrentFilter"]"> @Localizer["Created"] <i class="fas fa-sort"></i></a>
+                </th>
+                <th>
+                    @Localizer["Application"]
+                </th>
+                <th>
+                    @Localizer["Process"]
+                </th>
+                <th>
+                    @Localizer["Workflow"]
+                </th>
+                <th>
+                    @Localizer["Form type"]
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model != null)
+            {
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Id)
+                        </td>
+                        <td>
+                            <a href="@Url.Action("Edit", "Form", new { id = item.Id })">@Html.DisplayFor(modelItem => item.Name)</a>
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Created)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.BpsStepPath.BpsWorkflowStep.BpsWorkflow.BpsProcess.BpsApplication.Name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.BpsStepPath.BpsWorkflowStep.BpsWorkflow.BpsProcess.Name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.BpsStepPath.BpsWorkflowStep.BpsWorkflow.Name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.BpsFormType.Name)
+                        </td>
+                        <td>
+                            <a href="@Url.Action("Edit", "Form", new { id = item.Id })" class="btn btn-light"><i class="fas fa-edit"></i></a>
+                            <a href="@Url.Action("Delete", "Form", new { id = item.Id })" class="btn btn-light"><i class="fas fa-trash"></i></a>
+                        </td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+    <br />
+    <p>@Localizer["Pages"] @Model?.PageIndex @Localizer["PagesOf"] @Model?.TotalPages</p>
+    @{
+        var prevDisabled = !(Model?.HasPreviousPage ?? false) ? "disabled" : "";
+        var nextDisabled = !(Model?.HasNextPage ?? false) ? "disabled" : "";
+    }
+    <a asp-action="Index"
+       asp-route-sortOrder="@ViewData["CurrentSort"]"
+       asp-route-pageNumber="@((Model?.PageIndex??1) - 1)"
+       asp-route-currentFilter="@ViewData["CurrentFilter"]"
+       class="btn btn-dark @prevDisabled">
+        @Localizer["Previous"]
+    </a>
+    <a asp-action="Index"
+       asp-route-sortOrder="@ViewData["CurrentSort"]"
+       asp-route-pageNumber="@((Model?.PageIndex??1) + 1)"
+       asp-route-currentFilter="@ViewData["CurrentFilter"]"
+       class="btn btn-dark @nextDisabled">
+        @Localizer["Next"]
+    </a>
+</div>

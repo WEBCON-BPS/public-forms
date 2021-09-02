@@ -1,0 +1,325 @@
+﻿html {
+    position: relative;
+    min-height: 100%;
+    font-size: 14px;
+}
+body {
+    height: 100%;
+}
+/*Common*/
+/* Provide sufficient contrast against white background */
+a {
+    color: inherit;
+}
+a:hover {
+    text-decoration: none;
+    color: gray;
+}
+.required:after {
+    content: " *";
+    color: red;
+}
+.display-disabled {
+    opacity: 0.6;
+    pointer-events: none;
+}
+.rotate {
+    animation: rotate 2s linear infinite;
+}
+@keyframes rotate {
+    100% {
+        -webkit-transform: rotate(360deg);
+        transform: rotate(360deg);
+    }
+}
+.error-number {
+    font-size: 10em;
+    font-weight: 800;
+    color: #33334d;
+    opacity: 0.8;
+}
+.btn, input {
+    border-radius: 0px !important;
+}
+.label-small {
+    font-size: 8pt;
+}
+.border-top {
+    border-top: 1px solid #e5e5e5;
+}
+.box-shadow {
+    box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
+}
+.body-wrapper {
+    overflow-x: hidden;
+    height: 100vh;
+    position: relative;
+    background-color: #33334d !important;
+}
+.s-middle {
+    position: absolute;
+    top: 50%;
+    right: 50%;
+    transform: translate(50%,-50%);
+    padding: 2% 6% 2% 6%;
+}
+/*Navigation*/
+#navbar {
+    width: 15%;
+}
+#sidenav {
+    height: 100%;
+    width: 15%;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    overflow-x: hidden;
+    padding-top: 60px;
+    transition: 0.5s;
+    padding-left: 0px !important;
+    padding-right: 0px !important;
+    background-color: #33334d;
+}
+#sidenav .container-fluid {
+    padding-left: 0px;
+    padding-right: 0px;
+}
+.nav-item, .navbar-nav {
+    width: 100% !important;
+}
+.nav-link {
+    color: white !important;
+    text-transform: uppercase;
+    width: 100%;
+}
+.nav-item-text {
+    text-align: center;
+}
+
+.nav-item:hover {
+    background-color: #8585ad;
+}
+.navbar-toggler {
+    color: white;
+}
+.nav-logo {
+    width: 100%;
+}
+/*Content*/
+#page-content {
+    width: 80%;
+}
+/*Footer*/
+.footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    white-space: nowrap;
+    line-height: 60px;
+}
+/*Form editor*/
+#formDisplay {
+    padding: 10px;
+}
+.form-check-input {
+    padding: 4px !important;
+}
+#metadata-list div {
+    width: 100%;
+}
+#formDisplay iframe {
+    border: none;
+    min-height: 100%;
+    width: 100%;
+    overflow: visible;
+}
+.modal-content {
+    height: 90vh;
+}
+#formDisplay .modal-body {
+    min-height: 100%;
+    overflow: scroll;
+}
+.tab {
+    overflow: hidden;
+    border: 1px solid #8585ad;
+    background-color: #52527a;
+}
+.tab button {
+    background-color: #52527a;
+    float: left;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 14px 16px;
+    transition: 0.3s;
+    font-size: 17px;
+    color: white !important;
+}
+.tab button:hover {
+    background-color: #8585ad;
+}
+.tab button.active {
+    background-color: #33334d;
+    color: white;
+}
+.tabcontent {
+    display: none;
+    padding: 0px;
+    border: 1px solid #ccc;
+    border-top: none;
+    height: 400px;
+    background-color: #52527a;
+    width: 100%;
+    overflow-y: hidden;
+    word-wrap: break-word;
+    font-size: 10pt;
+    font-family: Consolas;
+    color: white;
+}
+.tabcontent-text {
+    display: table-cell;
+    width: 100%;
+    min-height: 100%;
+    background-color: transparent;
+    border: none;
+    color: white;
+}
+#metadata-list
+{
+    position: relative;
+}
+#fields-loading-icon-container {
+    position: absolute;
+    top: 50%;
+    right: 50%;
+    transform: translate(50%,-50%);
+    text-align:center;
+    font-size: 3em;
+    color: inherit;
+    visibility: hidden;
+}
+/*Login page*/
+.login-window {
+    color: lightslategray;
+    box-shadow: 5px 5px 15px;
+    background-color: white;
+}
+.login-window .form-control {
+    border-top: none !important;
+    border-left: none !important;
+    border-right: none !important;
+}
+.meta-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+.meta-col, .meta-th {
+    padding: 6px;
+    border-bottom: 1px solid #ccc;
+    text-align: left;
+}
+.display-disabled select {
+    pointer-events: none;
+    background-color: #F0F0F0;
+}
+/*Start element page*/
+#start-element-result {
+    box-shadow: lightgray 1px 5px 5px;
+    border: 1px solid lightgray;
+}
+/*Media*/
+@media (min-width: 768px) {
+    html {
+        font-size: 16px;
+    }
+}
+@media (max-width: 991.98px) {
+    #navbar {
+        width: 0%;
+    }
+    #page-content {
+        width: 100%;
+    }
+    .tab button {
+        padding: 14px 16px;
+        font-size: 12px;
+    }
+    .navbar-brand {
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+    #sidenav {
+        height: auto;
+        width: 100vw;
+        position: fixed;
+        padding-top: 0px;
+    }
+    .nav-logo {
+        width: 40%;
+        vertical-align: middle;
+        height: 100%;
+    }
+    .navbar-toggler {
+        border: none;
+    }
+}
+@media only screen and (max-width: 450px), (min-device-width: 768px) and (max-device-width: 1024px) {
+    .meta-col:before, .meta-name {
+        font-size: 8pt !important;
+    }
+}
+@media only screen and (max-width: 760px), (min-device-width: 768px) and (max-device-width: 1024px) {
+    .meta-table, .meta-thead, .meta-tbody, .meta-th, .meta-col, .meta-row {
+        display: block;
+    }
+    .meta-thead .meta-row {
+        position: absolute;
+        top: -9999px;
+        left: -9999px;
+    }
+    .meta-name {
+        font-size: inherit;
+        word-wrap: break-word;
+    }
+    .meta-row {
+        border-bottom: 1px solid #ccc;
+    }
+    .meta-col {
+        border: none;
+        border-bottom: 1px solid #eee;
+        position: relative;
+        padding-left: 50% !important;
+    }
+        .meta-col:before {
+            position: absolute;
+            top: 0;
+            left: 6px;
+            width: 45%;
+            padding-right: 10px;
+            white-space: nowrap;
+            font-weight: bold;
+        }
+    .meta-col:nth-of-type(1):before {
+        content: "Attribute Native Name";
+    }
+    .meta-col:nth-of-type(2):before {
+        content: "Custom Name";
+    }
+    .meta-col:nth-of-type(3):before {
+        content: "Required";
+    }
+    .meta-col:nth-of-type(4):before {
+        content: "Required warning text";
+    }
+    #frame-ancestors h5
+    {
+        font-size:1em;
+    }
+    #frame-ancestors .frame-ancestor-line .form-control {
+        max-width: 80%;
+    }
+}

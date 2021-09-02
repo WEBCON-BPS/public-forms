@@ -1,0 +1,318 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="API url was not specified" xml:space="preserve">
+    <value>Nie określono Url dla Portalu BPS</value>
+  </data>
+  <data name="Application guid has not been provided. Could not get processes." xml:space="preserve">
+    <value>Nie przekazano guid aplikacji. Nie można pobrać procesów.</value>
+  </data>
+  <data name="Application is required" xml:space="preserve">
+    <value>Aplikacja jest wymagana</value>
+  </data>
+  <data name="Cannot add field with an undefined type" xml:space="preserve">
+    <value>Nie można dodać pola z niezdefiniowanym typem.</value>
+  </data>
+  <data name="Cannot create field because field data has not been provided" xml:space="preserve">
+    <value>Nie można utworzyć pola ponieważ nie przekazano danych do jego utworzenia.</value>
+  </data>
+  <data name="Client login data have not been provided" xml:space="preserve">
+    <value>Nie przekazano danych logowania do portalu BPS</value>
+  </data>
+  <data name="Client service instance has not been provided" xml:space="preserve">
+    <value>Nie utworzono klienta HTTP do portalu BPS</value>
+  </data>
+  <data name="Content cannot be empty" xml:space="preserve">
+    <value>Zawartość formularza nie może być pusta</value>
+  </data>
+  <data name="Could not add form because application has not been selected" xml:space="preserve">
+    <value>Nie można dodać formularza ponieważ aplikacja nie została wybrana.</value>
+  </data>
+  <data name="Could not add form because form fields have not been provided" xml:space="preserve">
+    <value>Nie można dodać formularza ponieważ pola formularza nie zostały przekazane.</value>
+  </data>
+  <data name="Could not add form because formType has not been selected" xml:space="preserve">
+    <value>Nie można dodać formularza poniewać typ formularza nie został wybrany</value>
+  </data>
+  <data name="Could not add form because process has not been selected" xml:space="preserve">
+    <value>Nie można dodać formularza ponieważ proces nie został wybrany.</value>
+  </data>
+  <data name="Could not add form because start step has not been selected" xml:space="preserve">
+    <value>Nie można dodać formularza ponieważ krok startowy nie został wybrany.</value>
+  </data>
+  <data name="Could not add form because step path has not been selected" xml:space="preserve">
+    <value>Nie można dodać formularza ponieważ ścieżka nie została wybrana.</value>
+  </data>
+  <data name="Could not add form because workflow has not been selected" xml:space="preserve">
+    <value>Nie można dodać formularza ponieważ obieg nie został wybrany.</value>
+  </data>
+  <data name="Custom connection client id should be passed" xml:space="preserve">
+    <value>Id klienta musi zostać wypełnione</value>
+  </data>
+  <data name="Custom connection client secret should be passed" xml:space="preserve">
+    <value>Hasło klienta musi zostać wypełnione</value>
+  </data>
+  <data name="Custom connection data should be passed" xml:space="preserve">
+    <value>Własne dane połączenia powinny być wybrane jeśli włączono opcję własnych ustawień.</value>
+  </data>
+  <data name="Data for login not provided" xml:space="preserve">
+    <value>Nie przekazano danych logowania</value>
+  </data>
+  <data name="Data source instance not provided" xml:space="preserve">
+    <value>Nie zainicjalizowano źródła danych</value>
+  </data>
+  <data name="Field value cannot be empty. Field type is required" xml:space="preserve">
+    <value>Typ pola jest wymagany</value>
+  </data>
+  <data name="form builder instance not provided" xml:space="preserve">
+    <value>Nie utworzono obiektu tworzącego formularz.</value>
+  </data>
+  <data name="Form content field - form BPS field association is required" xml:space="preserve">
+    <value>Nie znaleziono powiązania pól formularza z polami BPS. Skontaktuj się z administratorem.</value>
+  </data>
+  <data name="Form content field - form has to be provided" xml:space="preserve">
+    <value>Pole formularza - nie przekazano powiązania z formularzem.</value>
+  </data>
+  <data name="Form content field - metadata name is required" xml:space="preserve">
+    <value>Pole formularza - nazwa pola jest wymagana.</value>
+  </data>
+  <data name="Form data model has not been provided. Could not add a new form" xml:space="preserve">
+    <value>Nie udało się pobrać danych formularza. Nie można zapisać zmian.</value>
+  </data>
+  <data name="Form field has to be associated with form" xml:space="preserve">
+    <value>Pole formularza musi być powiązane z formularzem.</value>
+  </data>
+  <data name="Form fields are not provided. Could not create form." xml:space="preserve">
+    <value>Nie pobrano pól formularza. Nie można utworzyć zawartości.</value>
+  </data>
+  <data name="Form for specified identifier {0} not found" xml:space="preserve">
+    <value>Formularz o identyfikatorze {0} nie został znaleziony.</value>
+  </data>
+  <data name="Form guid has not been provided" xml:space="preserve">
+    <value>Nie udało się pobrać guid wybranego formularza.</value>
+  </data>
+  <data name="Form identifier has not been provided. Could not edit form." xml:space="preserve">
+    <value>Nie udało się pobrać identyfikatora edytowanego formularza. Nie można zapisać zmian.</value>
+  </data>
+  <data name="Form model has not been provided. Could not edit form" xml:space="preserve">
+    <value>Nie udało się pobrać danych formularza. Nie można zapisać zmian.</value>
+  </data>
+  <data name="Form not found" xml:space="preserve">
+    <value>Nie znaleziono formularza</value>
+  </data>
+  <data name="Form to delete not provided" xml:space="preserve">
+    <value>Nie przekazano formularza do usunięcia</value>
+  </data>
+  <data name="Form type guid has not been provided. Could not get form body." xml:space="preserve">
+    <value>Nie przekazano guid typu formularza. Nie można pobrać zawartości formularza.</value>
+  </data>
+  <data name="Form type has to be selected" xml:space="preserve">
+    <value>Typ formularza musi być wybrany</value>
+  </data>
+  <data name="Form type is required" xml:space="preserve">
+    <value>Typ formularza jest wymagany</value>
+  </data>
+  <data name="Internal Server Error. Contact with administrator" xml:space="preserve">
+    <value>Błąd wewnętrzny. Skontaktuj się z administratorem</value>
+  </data>
+  <data name="Minimum secret length is 4" xml:space="preserve">
+    <value>Hasło musi zawierać min. 4 znaki</value>
+  </data>
+  <data name="Name cannot be empty" xml:space="preserve">
+    <value>Nazwa nie może być pusta.</value>
+  </data>
+  <data name="Page not found" xml:space="preserve">
+    <value>Strona nie znaleziona</value>
+  </data>
+  <data name="Passed field value is not correct boolean value" xml:space="preserve">
+    <value>Przekazana wartość nie jest poprawną wartością typu boolean</value>
+  </data>
+  <data name="Passed field value is not correct choice list value" xml:space="preserve">
+    <value>Przekazana wartość jest niepoprawną wartością dla listy</value>
+  </data>
+  <data name="Passed field value is not correct date value" xml:space="preserve">
+    <value>Przekazana wartość jest niepoprawną wartością daty</value>
+  </data>
+  <data name="Passed field value is not correct decimal value" xml:space="preserve">
+    <value>Przekazana wartość jest niepoprawną wartością numeryczną</value>
+  </data>
+  <data name="Passed field value is not correct email value" xml:space="preserve">
+    <value>Przekazana wartość jest niepoprawną wartością pola email</value>
+  </data>
+  <data name="Passed field value is not correct integer value" xml:space="preserve">
+    <value>Przekazana wartość jest niepoprawną wartością numeryczną</value>
+  </data>
+  <data name="Passed field value is not correct rating scale value" xml:space="preserve">
+    <value>Przekazana wartość jest niepoprawną wartością oceny</value>
+  </data>
+  <data name="Passed field value is not correct survey choose value" xml:space="preserve">
+    <value>Przekazana wartość jest niepoprawną wartością dla listy wyboru</value>
+  </data>
+  <data name="Passed field value is not correct text value" xml:space="preserve">
+    <value>Przekazana wartość jest niepoprawną wartością tekstową</value>
+  </data>
+  <data name="Passed secret is empty" xml:space="preserve">
+    <value>Przekazane hasło jest puste</value>
+  </data>
+  <data name="Process guid has not been provided. Could not get workflows." xml:space="preserve">
+    <value>Nie przekazano guid procesu. Nie można pobrać obiegów.</value>
+  </data>
+  <data name="Process is required" xml:space="preserve">
+    <value>Proces jest wymagany</value>
+  </data>
+  <data name="Returned form content was empty" xml:space="preserve">
+    <value>Zwócone ciało formularza jest puste.</value>
+  </data>
+  <data name="Something went wrong. Please contact with administrator" xml:space="preserve">
+    <value>Coś poszło nie tak. Skontaktuj się z administratorem</value>
+  </data>
+  <data name="Start step is required" xml:space="preserve">
+    <value>Krok startowy jest wymagany</value>
+  </data>
+  <data name="Step guid has not been provided. Could not get step paths." xml:space="preserve">
+    <value>Nie przekazano guid kroku startowego. Nie można pobrać ścieżek dla kroku.</value>
+  </data>
+  <data name="Step path has to be selected" xml:space="preserve">
+    <value>Ścieżka kroku musi być wybrana.</value>
+  </data>
+  <data name="The form has not been created. Please, contact with administrator." xml:space="preserve">
+    <value>Formularz nie został utworzony. Skontaktuj się z administratorem.</value>
+  </data>
+  <data name="Unauthorized" xml:space="preserve">
+    <value>Brak autoryzacji</value>
+  </data>
+  <data name="Workflow guid has not been provided. Could not get form body." xml:space="preserve">
+    <value>Nie przekazano guid obiegu. Nie można pobrać zawartości formularza.</value>
+  </data>
+  <data name="Workflow guid has not been provided. Could not get form types." xml:space="preserve">
+    <value>Nie przekazano guid obiegu. Nie można pobrać typów formularza.</value>
+  </data>
+  <data name="Workflow guid has not been provided. Could not get start step" xml:space="preserve">
+    <value>Nie przekazano guid obiegu. Niemożna pobrać kroku startowego.</value>
+  </data>
+  <data name="Workflow is required" xml:space="preserve">
+    <value>Obieg jest wymagany</value>
+  </data>
+  <data name="{0} is not correct datetime value" xml:space="preserve">
+    <value>{0} nie jest poprawną wartością daty</value>
+  </data>
+  <data name="{0} is not supported form field type." xml:space="preserve">
+    <value>{0} nie jest wspieranym typem pola formularza.</value>
+  </data>
+</root>

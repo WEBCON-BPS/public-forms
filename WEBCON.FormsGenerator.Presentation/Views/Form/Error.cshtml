@@ -1,0 +1,12 @@
+﻿@model WEBCON.FormsGenerator.Presentation.ViewModels.ErrorViewModel
+@{
+    Layout = null;
+}
+<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+<link rel="stylesheet" href="~/css/site.css" />
+<div class="s-middle text-center">
+    <img src="~/img/logo-black2.png" />
+    <h1 class="error-number">@Model.StatusCode</h1>
+    <h4>@Model.Message</h4>
+    <a href="@Url.Action("Index", "Forms")" class="btn btn-dark">Back to main</a>
+</div>

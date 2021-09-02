@@ -1,0 +1,48 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - WEBCON Forms Generator</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="stylesheet" href="~/lib/fontawesome/css/fontawesome.min.css" />
+    <link rel="stylesheet" href="~/lib/fontawesome/css/solid.min.css" />
+</head>
+<body>
+    <header>
+        <nav id="sidenav" class="navbar d-flex flex-column navbar-dark navbar-expand-lg box-shadow pb-3 pt-3">
+            <div class="container-fluid flex-lg-column flex-row">
+                <a class="navbar-brand mb-lg-5" asp-area="" asp-controller="Forms" asp-action="Index"><img src="~/img/logo.png" class="nav-logo" /></a>
+                <button class="navbar-toggler mr-5" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse w-100">
+                    <ul class="navbar-nav flex-grow-1 flex-column mt-3">
+                        <partial name="_MenuPartial" />
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div class="container-fluid d-flex flex-row">
+        <div id="navbar">
+        </div>
+        <div id="page-content">
+            <main role="main" class="pt-lg-4 pt-5 pb-5 mb-5 mt-lg-0 mt-5">
+                @RenderBody()
+            </main>
+        </div>
+    </div>
+    <footer class="border-top footer text-muted">
+        <div class="container mr-0 d-flex flex-row">
+            <div class="ml-auto"> &copy; 2021 - WEBCON Forms Generator</div>
+            <div class="ml-5"> @await Html.PartialAsync("_SelectLanguagePartial")</div>
+        </div>
+    </footer>
+    <script src="~/lib/jquery/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

@@ -1,0 +1,44 @@
+﻿@model WEBCON.FormsGenerator.Presentation.ViewModels.FormViewModel
+<div class="form-group">
+    <label asp-for="BpsApplicationName"></label>
+    @Html.DropDownListFor(m => m.BpsApplicationGuid, new SelectList(new List<KeyValuePair<Guid, string>>() { new KeyValuePair<Guid, string>(@Model.BpsApplicationGuid, @Model.BpsApplicationName) }, "Key", "Value"), new { @class = "form-control", id = "applications" })
+    @Html.HiddenFor(x => x.BpsApplicationName, new { id = "applicationName" })
+    <span asp-validation-for="BpsApplicationGuid" class="text-danger"></span>
+    <span asp-validation-for="BpsApplicationName" class="text-danger"></span>
+</div>
+<div class="form-group">
+    <label asp-for="BpsProcessName"></label>
+    @Html.DropDownListFor(x => x.BpsProcessGuid, new SelectList(new List<KeyValuePair<Guid, string>>() { new KeyValuePair<Guid, string>(@Model.BpsProcessGuid, @Model.BpsProcessName) }, "Key", "Value"), new { @class = "form-control", id = "process" })
+    @Html.HiddenFor(x => x.BpsProcessName, new { id = "processName" })
+    <span asp-validation-for="BpsProcessGuid" class="text-danger"></span>
+</div>
+<div class="form-group">
+    <label asp-for="BpsWorkflowName"></label>
+    @Html.DropDownListFor(x => x.BpsWorkflowGuid, new SelectList(new List<KeyValuePair<Guid, string>>() { new KeyValuePair<Guid, string>(@Model.BpsWorkflowGuid, @Model.BpsWorkflowName) }, "Key", "Value"), new { @class = "form-control", id = "workflow" })
+    @Html.HiddenFor(x => x.BpsWorkflowName, new { id = "workflowName" })
+    <span asp-validation-for="BpsWorkflowGuid" class="text-danger"></span>
+</div>
+<div class="form-group">
+    <label asp-for="BpsWorkflowStartStepName"></label>
+    <input type="text" class="form-control" readonly id="startStepName" asp-for="BpsWorkflowStartStepName" />
+    @Html.HiddenFor(x => x.BpsWorkflowStartStepGuid, new { id = "startStep" })
+    <span asp-validation-for="BpsWorkflowStartStepGuid" class="text-danger"></span>
+</div>
+<div class="form-group">
+    <label asp-for="BpsStartStepPathName"></label>
+    @Html.DropDownListFor(x => x.BpsStartStepPathGuid, new SelectList(new List<KeyValuePair<Guid, string>>() { new KeyValuePair<Guid, string>(@Model.BpsStartStepPathGuid, @Model.BpsStartStepPathName) }, "Key", "Value"), new { @class = "form-control", id = "paths" })
+    @Html.HiddenFor(x => x.BpsStartStepPathName, new { id = "pathName" })
+    <span asp-validation-for="BpsStartStepPathGuid" class="text-danger"></span>
+</div>
+<div class="form-group">
+    <label asp-for="BpsFormTypeName"></label>
+    @Html.DropDownListFor(x => x.BpsFormTypeGuid, new SelectList(new List<KeyValuePair<Guid, string>>() { new KeyValuePair<Guid, string>(@Model.BpsFormTypeGuid, @Model.BpsFormTypeName) }, "Key", "Value"), new { @class = "form-control", id = "formType" })
+    @Html.HiddenFor(x => x.BpsFormTypeName, new { id = "formTypeName" })
+    <span asp-validation-for="BpsFormTypeGuid" class="text-danger"></span>
+</div>
+<div class="form-group">
+    <label asp-for="BpsBusinessEntityName"></label>
+    @Html.DropDownListFor(x => x.BpsBusinessEntityGuid, new SelectList(new List<KeyValuePair<Guid, string>>() { new KeyValuePair<Guid, string>(@Model.BpsBusinessEntityGuid, @Model.BpsBusinessEntityName) }, "Key", "Value"), new { @class = "form-control", id = "bpsBusinessEntityGuid" })
+    @Html.HiddenFor(x => x.BpsBusinessEntityName, new { id = "bpsBusinessEntityName" })
+    <span asp-validation-for="BpsBusinessEntityGuid" class="text-danger"></span>
+</div>

@@ -1,0 +1,33 @@
+﻿@model WEBCON.FormsGenerator.Presentation.ViewModels.LoginViewModel
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - WEBCON Forms Generator</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+</head>
+<body>
+<div class="body-wrapper">
+    <div class="login-window s-middle">
+        <img src="~/img/logo-black2.png" />
+        <form asp-action="Login" class="mt-3 text-center">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <input type="text" class="form-control" placeholder="Login" asp-for="Login" />
+            </div>
+            <div class="form-group">
+                <input type="password" class="form-control" placeholder="Password" asp-for="Password" />
+            </div>
+            <div class="form-group mt-4">
+                <input type="submit" value="Login" class="btn btn-secondary" />
+            </div>
+        </form>
+    </div>
+</div>
+</body>
+</html>

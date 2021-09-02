@@ -1,0 +1,29 @@
+﻿@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
+
+@if (User.Identity?.Name != null)
+{
+    <li class="nav-item-text">
+        <span class="navbar-text">@Localizer["Logged as", @User.Identity.Name]</span>
+    </li>
+}
+else
+{
+    <li class="nav-item">
+        <a class="nav-link text-dark" asp-controller="Account" asp-action="Login">@Localizer["Login"]</a>
+    </li>
+}
+<li class="nav-item pl-2 pr-2">
+    <a class="nav-link text-center" asp-area="" asp-controller="Forms" asp-action="Index">@Localizer["Home"]</a>
+</li>
+<li class="nav-item pl-2 pr-2">
+    <a class="nav-link text-center" asp-area="" asp-controller="Configuration" asp-action="Index">@Localizer["Configuration"]</a>
+</li>
+@if (User.Identity?.Name != null)
+{
+    <li class="nav-item">
+        <form class="form-inline" asp-controller="Account" asp-action="Logout" asp-route-returnUrl="@Url.Action("Index", "Form", new { area = "" })">
+            <button type="submit" class="nav-link btn btn-link">@Localizer["Logout"]</button>
+        </form>
+    </li>
+}

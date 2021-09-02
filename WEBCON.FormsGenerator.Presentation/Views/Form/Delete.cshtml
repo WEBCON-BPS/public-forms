@@ -1,0 +1,9 @@
+﻿@model FormViewModel
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
+<form asp-action="DeleteConfirmed" class="p-2">
+    <p>@Localizer["Are you sure you want to delete form?", @Model.Id]</p>
+    <input type="hidden" asp-for="Id" value="@Model.Id" />
+    <input type="submit" value="@Localizer["Yes"]" class="btn btn-secondary" />
+    <a href="@Url.Action("Index", "Forms")" class="btn btn-secondary">@Localizer["No"]</a>
+</form>

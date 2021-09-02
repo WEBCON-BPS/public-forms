@@ -1,0 +1,8 @@
+﻿@using Microsoft.AspNetCore.Localization
+<script src="~/lib/jquery-validation/jquery.validate.min.js"></script>
+<script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+@{var currentLangugage = Context.Features.Get<IRequestCultureFeature>().RequestCulture.UICulture.Name;}
+@if (currentLangugage == "pl")
+{
+    <script src="~/lib/jquery-validation/localization/messages_pl.js"></script>
+}

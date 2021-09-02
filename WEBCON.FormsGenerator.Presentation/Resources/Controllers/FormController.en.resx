@@ -1,0 +1,309 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="API url was not specified" xml:space="preserve">
+    <value>API url was not specified</value>
+  </data>
+  <data name="Application guid has not been provided. Could not get processes." xml:space="preserve">
+    <value>Application guid has not been provided. Could not get processes.</value>
+  </data>
+  <data name="Application is required" xml:space="preserve">
+    <value>Application is required</value>
+  </data>
+  <data name="Cannot add field with an undefined type" xml:space="preserve">
+    <value>Cannot add field with an undefined type</value>
+  </data>
+  <data name="Cannot create field because field data has not been provided" xml:space="preserve">
+    <value>Cannot create field because field data has not been provided</value>
+  </data>
+  <data name="Client login data have not been provided" xml:space="preserve">
+    <value>Client login data have not been provided</value>
+  </data>
+  <data name="Client service instance has not been provided" xml:space="preserve">
+    <value>Client service instance has not been provided</value>
+  </data>
+  <data name="Content cannot be empty" xml:space="preserve">
+    <value>Content cannot be empty</value>
+  </data>
+  <data name="Could not add form because application has not been selected" xml:space="preserve">
+    <value>Could not add form because application has not been selected</value>
+  </data>
+  <data name="Could not add form because form fields have not been provided" xml:space="preserve">
+    <value>Could not add form because form fields have not been provided</value>
+  </data>
+  <data name="Could not add form because formType has not been selected" xml:space="preserve">
+    <value>Could not add form because formType has not been selected</value>
+  </data>
+  <data name="Could not add form because process has not been selected" xml:space="preserve">
+    <value>Could not add form because process has not been selected</value>
+  </data>
+  <data name="Could not add form because start step has not been selected" xml:space="preserve">
+    <value>Could not add form because start step has not been selected</value>
+  </data>
+  <data name="Could not add form because step path has not been selected" xml:space="preserve">
+    <value>Could not add form because step path has not been selected</value>
+  </data>
+  <data name="Could not add form because workflow has not been selected" xml:space="preserve">
+    <value>Could not add form because workflow has not been selected</value>
+  </data>
+  <data name="Could not load data." xml:space="preserve">
+    <value>Could not load data.</value>
+  </data>
+  <data name="Could not load data. Contact with administrator." xml:space="preserve">
+    <value>Could not load data. Contact with administrator.</value>
+  </data>
+  <data name="Custom connection client id should be passed" xml:space="preserve">
+    <value>Custom connection client id should be passed</value>
+  </data>
+  <data name="Custom connection client secret should be passed" xml:space="preserve">
+    <value>Custom connection client secret should be passed</value>
+  </data>
+  <data name="Custom connection data should be passed" xml:space="preserve">
+    <value>Custom connection data should be passed if custom connection is selected</value>
+  </data>
+  <data name="Data for login not provided" xml:space="preserve">
+    <value>Data for login not provided</value>
+  </data>
+  <data name="Data source instance not provided" xml:space="preserve">
+    <value>Data source instance not provided</value>
+  </data>
+  <data name="Field value cannot be empty. Field type is required" xml:space="preserve">
+    <value>Field value cannot be empty. Field type is required</value>
+  </data>
+  <data name="form builder instance not provided" xml:space="preserve">
+    <value>form builder instance not provided</value>
+  </data>
+  <data name="Form data model has not been provided. Could not add a new form" xml:space="preserve">
+    <value>Form data model has not been provided. Could not add a new form</value>
+  </data>
+  <data name="Form field has to be associated with form" xml:space="preserve">
+    <value>Form field has to be associated with form</value>
+  </data>
+  <data name="Form fields are not provided. Could not create form." xml:space="preserve">
+    <value>Form fields are not provided. Could not create form.</value>
+  </data>
+  <data name="Form for specified identifier {0} not found" xml:space="preserve">
+    <value>Form for specified identifier {0} not found</value>
+  </data>
+  <data name="Form guid has not been provided" xml:space="preserve">
+    <value>Form guid has not been provided</value>
+  </data>
+  <data name="Form identifier has not been provided. Could not edit form." xml:space="preserve">
+    <value>Form identifier has not been provided. Could not edit form.</value>
+  </data>
+  <data name="Form model has not been provided. Could not edit form" xml:space="preserve">
+    <value>Form model has not been provided. Could not edit form</value>
+  </data>
+  <data name="Form not found" xml:space="preserve">
+    <value>Form not found</value>
+  </data>
+  <data name="Form to delete not provided" xml:space="preserve">
+    <value>Form to delete not provided</value>
+  </data>
+  <data name="Form type guid has not been provided. Could not get form body." xml:space="preserve">
+    <value>Form type guid has not been provided. Could not get form body.</value>
+  </data>
+  <data name="Form type has to be selected" xml:space="preserve">
+    <value>Form type has to be selected</value>
+  </data>
+  <data name="Form type is required" xml:space="preserve">
+    <value>Form type is required</value>
+  </data>
+  <data name="Internal Server Error. Contact with administrator" xml:space="preserve">
+    <value>Internal Server Error. Contact with administrator</value>
+  </data>
+  <data name="Name cannot be empty" xml:space="preserve">
+    <value>Name cannot be empty</value>
+  </data>
+  <data name="Page not found" xml:space="preserve">
+    <value>Page not found</value>
+  </data>
+  <data name="Passed field value is not correct boolean value" xml:space="preserve">
+    <value>Passed field value is not correct boolean value</value>
+  </data>
+  <data name="Passed field value is not correct choice list value" xml:space="preserve">
+    <value>Passed field value is not correct choice list value</value>
+  </data>
+  <data name="Passed field value is not correct date value" xml:space="preserve">
+    <value>Passed field value is not correct date value</value>
+  </data>
+  <data name="Passed field value is not correct decimal value" xml:space="preserve">
+    <value>Passed field value is not correct decimal value</value>
+  </data>
+  <data name="Passed field value is not correct email value" xml:space="preserve">
+    <value>Passed field value is not correct email value</value>
+  </data>
+  <data name="Passed field value is not correct integer value" xml:space="preserve">
+    <value>Passed field value is not correct integer value</value>
+  </data>
+  <data name="Passed field value is not correct rating scale value" xml:space="preserve">
+    <value>Passed field value is not correct rating scale value</value>
+  </data>
+  <data name="Passed field value is not correct survey choose value" xml:space="preserve">
+    <value>Passed field value is not correct survey choose value</value>
+  </data>
+  <data name="Passed field value is not correct text value" xml:space="preserve">
+    <value>Passed field value is not correct text value</value>
+  </data>
+  <data name="Process guid has not been provided. Could not get workflows." xml:space="preserve">
+    <value>Process guid has not been provided. Could not get workflows.</value>
+  </data>
+  <data name="Process is required" xml:space="preserve">
+    <value>Process is required</value>
+  </data>
+  <data name="Returned form content was empty" xml:space="preserve">
+    <value>Returned form content was empty</value>
+  </data>
+  <data name="Something went wrong. Please contact with administrator" xml:space="preserve">
+    <value>Something went wrong. Please contact with administrator.</value>
+  </data>
+  <data name="Start step is required" xml:space="preserve">
+    <value>Start step is required</value>
+  </data>
+  <data name="Step guid has not been provided. Could not get step paths." xml:space="preserve">
+    <value>Step guid has not been provided. Could not get step paths.</value>
+  </data>
+  <data name="Step path has to be selected" xml:space="preserve">
+    <value>Step path has to be selected</value>
+  </data>
+  <data name="The form has not been created. Please, contact with administrator." xml:space="preserve">
+    <value>The form has not been created. Please, contact with administrator.</value>
+  </data>
+  <data name="Unauthorized" xml:space="preserve">
+    <value>Unauthorized</value>
+  </data>
+  <data name="Workflow guid has not been provided. Could not get form body." xml:space="preserve">
+    <value>Workflow guid has not been provided. Could not get form body.</value>
+  </data>
+  <data name="Workflow guid has not been provided. Could not get form types." xml:space="preserve">
+    <value>Workflow guid has not been provided. Could not get form types.</value>
+  </data>
+  <data name="Workflow guid has not been provided. Could not get start step" xml:space="preserve">
+    <value>Workflow guid has not been provided. Could not get start step</value>
+  </data>
+  <data name="Workflow is required" xml:space="preserve">
+    <value>Workflow is required</value>
+  </data>
+  <data name="{0} is not correct datetime value" xml:space="preserve">
+    <value>{0} is not correct datetime value</value>
+  </data>
+  <data name="{0} is not supported form field type." xml:space="preserve">
+    <value>{0} is not supported form field type.</value>
+  </data>
+</root>

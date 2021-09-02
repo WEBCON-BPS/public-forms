@@ -1,0 +1,28 @@
+﻿body {
+}
+.required:after {
+    content: " *";
+    color: red;
+}
+.disabled {
+    pointer-events: none;
+    background-color: #F0F0F0;
+    opacity: 0.6;
+}
+span.field-validation-error, label.error
+{
+    color:red;
+    display:block;
+}
+label
+{
+    padding-right:5px;
+}
+input[datetime-control=true], input[date-control=true] {
+    background: url("/lib/fontawesome/svgs/solid/calendar-alt.svg");
+    opacity: 0.9;
+    background-position: right 10px top 7px;
+    background-size: 20px 20px;
+    background-repeat: no-repeat;
+    padding-left: 17px;
+}

@@ -1,0 +1,162 @@
+﻿@model WEBCON.FormsGenerator.Presentation.ViewModels.FormViewModel
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
+<h4>@Localizer["Form configuration"]</h4>
+<hr />
+<div id="form-configuration" class="d-flex flex-column">
+    <div id="form-extended-config">
+        <div id="frame-ancestors" class="mt-3">
+            <h5>@Localizer["Frame Whitelist Sites"]<button value="Add" id="add-frame-ancestor" class="ml-1 btn btn-light" type="button"><i class="fas fa-plus"></i></button> </h5>
+            @if (Model.FrameAncestors != null)
+            {
+                @for (int i = 0; i < Model.FrameAncestors.Length; i++)
+                {
+                    <div class="form-inline frame-ancestor-line"><input type="text" class="form-control" name="FrameAncestors" value="@Model.FrameAncestors[i]" /><button value="Remove" class="btn btn-light ml-2 remove-frame-ancestor" type="button"><i class="fas fa-minus"></i></button></div>
+                }
+            }
+        </div>
+        <div class="form-check">
+            @Html.CheckBoxFor(x => x.IsCaptchaRequired, new { @id = "captcha", @class = "form-check-input" })
+            <label class="form-check-label" asp-for="IsCaptchaRequired"></label>
+        </div>
+        <div class="form-check mt-3">
+            @Html.CheckBoxFor(x => x.UseStandardBootstrapStyle, new { @class = "form-check-input" })
+            <label class="form-check-label" asp-for="UseStandardBootstrapStyle"></label>
+        </div>
+        <div class="form-group row mt-3">
+            <div class="col-sm-3">
+                <label asp-for="CustomCssLink"></label>
+            </div>
+            <div class="col-sm-9">
+                @Html.TextBoxFor(x => x.CustomCssLink, new { @class = "form-control" })
+            </div>
+        </div>
+        <div class="form-group row mt-3">
+            <div class="col-sm-3">
+                <label asp-for="ContentTitle"></label>
+            </div>
+            <div class="col-sm-9">
+                @Html.TextBoxFor(x => x.ContentTitle, new { @class = "form-control" })
+            </div>
+        </div>
+        <div class="form-group row mt-3">
+            <div class="col-sm-3">
+                <label asp-for="ContentDescription"></label>
+            </div>
+            <div class="col-sm-9">
+                @Html.TextBoxFor(x => x.ContentDescription, new { @class = "form-control" })
+            </div>
+        </div>
+        <div class="form-group row mt-3">
+            <div class="col-sm-3">
+                <label asp-for="ContentSubmitText"></label>
+            </div>
+            <div class="col-sm-9">
+                @Html.TextBoxFor(x => x.ContentSubmitText, new { @class = "form-control" })
+            </div>
+        </div>
+        <div class="form-group row mt-3">
+            <div class="col-sm-3">
+                <label asp-for="ContentSubmitProcessingText"></label>
+            </div>
+            <div class="col-sm-9">
+                @Html.TextBoxFor(x => x.ContentSubmitProcessingText, new { @class = "form-control" })
+            </div>
+        </div>
+        <div class="form-group row mt-3">
+            <div class="col-sm-3"><label asp-for="ContentSubmitSuccessMessage"></label></div>
+            <div class="col-sm-9">
+                @Html.TextBoxFor(x => x.ContentSubmitSuccessMessage, new { @class = "form-control" })
+                @if (Model.MessageParameters != null)
+                {
+                    @foreach (var parameter in Model?.MessageParameters)
+                    {
+                        <button type="button" value="@parameter.Value" class="parameter-button mr-1 mt-1 btn btn-sm btn-secondary pt-0 pb-0">@parameter.Key</button>
+                    }
+                }
+            </div>
+        </div>
+    </div>
+    <div id="form-metadata" class="mb-2 mt-3">
+        @if (Model.Id > 0)
+        {
+            <button class="btn btn-secondary" type="button" id="refresh-form"><i id="refresh-icon" class="fas fa-sync-alt"></i> @Localizer["Refresh"]</button>
+        }
+    <div id="metadata-list">
+        <div id="fields-loading-icon-container"><i id="fields-loading-icon" class="fas fa-sync-alt"></i></div>
+        <table class="meta-table table">
+            <thead class="meta-thead">
+                <tr class="meta-row">
+                    <th scope="col" class="meta-th">@Localizer["Attribute Native Name"]</th>
+                    <th scope="col" class="meta-th">@Localizer["Custom Name"]</th>
+                    <th scope="col" class="meta-th">@Localizer["Required"]</th>
+                    <th scope="col" class="meta-th">@Localizer["Required warning text"]</th>
+                </tr>
+            </thead>
+            <tbody class="meta-tbody">
+                @if (Model.ContentFields != null)
+                {
+                    @for (int i = 0; i < Model.ContentFields.Count; i++)
+                    {
+                <tr class="meta-row">
+                    <td scope="col" class="meta-col"><label asp-for="@Model.ContentFields[i].BpsName">@Model.ContentFields[i].BpsName</label><br /><label class="label-small meta-name" asp-for="@Model.ContentFields[i].Name">@Model.ContentFields[i].Name</label></td>
+                    <td scope="col" class="meta-col"><input class="meta-customName form-control" asp-for="@Model.ContentFields[i].CustomName" value="@Model.ContentFields[i].CustomName" type="text"></td>
+                    <td scope="col" class="meta-col"><input class="meta-isRequired" asp-for="@Model.ContentFields[i].IsRequired" type="checkbox"></td>
+                    <td scope="col" class="meta-col"><input class="meta-fieldRequiredText form-control" asp-for="@Model.ContentFields[i].CustomRequiredWarningText" type="text"></td>
+                    <td hidden><input type="hidden" asp-for="@Model.ContentFields[i].BpsFormFieldGuid" value="@Model.ContentFields[i].BpsFormFieldGuid" /></td>
+                    <td hidden><input class="meta-guid" type="hidden" asp-for="@Model.ContentFields[i].Guid" value="@Model.ContentFields[i].Guid" /></td>
+                    <td hidden><input type="hidden" asp-for="@Model.ContentFields[i].Name" value="@Model.ContentFields[i].Name" /></td>
+                    <td hidden><input type="hidden" asp-for="@Model.ContentFields[i].Type" value="@Model.ContentFields[i].Type" /></td>
+                    <td hidden><input type="hidden" asp-for="@Model.ContentFields[i].BpsName" value="@Model.ContentFields[i].BpsName" /></td>
+                    <td hidden><input type="hidden" asp-for="@Model.ContentFields[i].BpsIsReadonly" value="@Model.ContentFields[i].BpsIsReadonly" /></td>
+                    <td hidden><input type="hidden" asp-for="@Model.ContentFields[i].BpsIsRequired" value="@Model.ContentFields[i].BpsIsRequired" /></td>
+                    <td hidden><input type="hidden" asp-for="@Model.ContentFields[i].AllowMultipleValues" value="@Model.ContentFields[i].AllowMultipleValues" /></td>
+                </tr>
+                    }
+                }
+            <tbody>
+        </table>
+    </div>
+    </div>
+    <div id="form-code" class="w-100">
+        <div class="tab">
+            <button type="button" class="tablinks active" id="button-html-meta">@Localizer["HTML Editing"]</button>
+            <button type="button" class="tablinks" id="button-css">CSS</button>
+            <button type="button" class="tablinks" id="button-preview">@Localizer["HTML Preview"]</button>
+            <button type="button" class="tablinks bg-dark float-right" id="button-run" data-toggle="modal" data-target="#formPreviewModal">@Localizer["Show preview"] <i class="fas fa-angle-double-right"></i></button>
+        </div>
+        <div id="form-html-metadata" class="tabcontent">
+            <textarea spellcheck="false" asp-for="Content" id="content" rows="20" class="tabcontent-text"></textarea>
+        </div>
+        <div id="form-style" class="tabcontent">
+            <textarea spellcheck="false" asp-for="Style" id="custom-css" rows="20" class="tabcontent-text"></textarea>
+        </div>
+        <div id="form-html" class="tabcontent">
+            <textarea spellcheck="false" asp-for="ContentTransformed" id="content-transformed" class="tabcontent-text" readonly></textarea>
+        </div>
+    </div>
+    <div class="modal fade" id="formPreviewModal" tabindex="-1" role="dialog" aria-labelledby="formPreviewModal" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="formPreviewModalTitle">@Localizer["HTML Form preview"]</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="@Localizer["Close"]">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body" id="formDisplay">
+                    <iframe src="@Url.Action("Preview", "FormContentPreview", new
+                                {
+                                 formContent = Model.ContentTransformed,
+                                 useStandardBootstrapStyle = Model.UseStandardBootstrapStyle,
+                                 customCssLink = "",
+                                 customCss = Model.Style,
+                                })" title="WEBCON Forms Generator IFrame" id="frame-preview"></iframe>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">@Localizer["Close"]</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

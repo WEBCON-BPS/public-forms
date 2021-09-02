@@ -1,0 +1,15 @@
+﻿@model WEBCON.FormsGenerator.Presentation.ViewModels.FormViewModel
+<label id="error" class="text-danger"></label>
+<div class="form-group">
+    <label asp-for="Name" class="control-label"></label>
+    <input asp-for="Name" class="form-control" />
+    <span asp-validation-for="Name" class="text-danger"></span>
+</div>
+<div class="form-check">
+    @Html.CheckBoxFor(x => x.IsActive, new { @id = "isActive", @class = "form-check-input" })
+    <label class="form-check-label" asp-for="IsActive"></label>
+    <span asp-validation-for="IsActive"></span>
+</div>
+<input type="hidden" asp-for="Guid" />
+<input asp-for="Id" hidden />
+@{await Html.RenderPartialAsync("_CustomConnection", Model); }

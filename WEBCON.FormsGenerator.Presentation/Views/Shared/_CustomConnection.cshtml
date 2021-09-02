@@ -1,0 +1,19 @@
+﻿@model WEBCON.FormsGenerator.Presentation.ViewModels.FormViewModel
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
+<div class="form-check mb-2 mt-3">
+    <input type="checkbox" class="form-check-input" id="custom-connection-check" asp-for="@Model.CustomConnectionSelected" />
+    <label class="form-check-label">@Localizer["Custom BPS access data"]</label>
+</div>
+<div id="custom-connection" class="collapse mt-3 mb-5">
+    <div class="form-group">
+        <label asp-for="@Model.CustomClientId"></label>
+        <input type="text" class="form-control" asp-for="@Model.CustomClientId" />
+        <span asp-validation-for="@Model.CustomClientId" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="@Model.CustomClientSecret"></label>
+        <input type="password" id="clientSecret" class="form-control" asp-for="@Model.CustomClientSecret" value="@Model.CustomClientSecret" />
+        <span asp-validation-for="@Model.CustomClientSecret" class="text-danger"></span>
+    </div>
+</div>
