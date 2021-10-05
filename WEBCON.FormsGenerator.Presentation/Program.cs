@@ -18,7 +18,6 @@ namespace WEBCON.FormsGenerator.Presentation
         {
             CreateHostBuilder(args).Build().Run();
         }
-        private static string KeyVaultEndpoint => "https://webconformsgenerator-kv.vault.azure.net/";
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
             .ConfigureLogging((context, logging) =>
@@ -37,7 +36,7 @@ namespace WEBCON.FormsGenerator.Presentation
                {
                    if (!String.IsNullOrEmpty(Environment.GetEnvironmentVariable("WEBSITE_SITE_NAME")))
                    {
-                       var keyVaultEndpoint = KeyVaultEndpoint;
+                       var keyVaultEndpoint = Environment.GetEnvironmentVariable("KEY_VAULT_ENDPOINT");
                        if (!string.IsNullOrEmpty(keyVaultEndpoint))
                        {
                            var azureServiceTokenProvider = new AzureServiceTokenProvider();
