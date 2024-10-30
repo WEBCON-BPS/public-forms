@@ -20,4 +20,4 @@ jobs:
       with:
         name: PublicForms
         path: |
-          WEBCON.FormsGenerator.Presentation/bin/Publish
+          WEBCON.FormsGenerator.Presentation/bin/Publish/
