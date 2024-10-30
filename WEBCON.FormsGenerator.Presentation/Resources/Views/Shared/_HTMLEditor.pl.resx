@@ -147,6 +147,9 @@
   <data name="Refresh" xml:space="preserve">
     <value>Odśwież pola</value>
   </data>
+  <data name="RefreshInfo" xml:space="preserve">
+    <value>Jeżeli typ atrybutu został zmieniony, wszystkie ręczne modyfikacje html dla tego atrybutu przepadną</value>
+  </data>
   <data name="Required" xml:space="preserve">
     <value>Pole wymagane</value>
   </data>

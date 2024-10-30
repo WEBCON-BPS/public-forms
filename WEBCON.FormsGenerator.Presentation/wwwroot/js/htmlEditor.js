@@ -185,4 +185,5 @@ $(document).ready(function () {
     ///Set height of preview depending on window height
     var height = $(window).height();
     $("frame-preview").css('height', height * 0.9 | 0);
+    $('[data-toggle="tooltip"]').tooltip()
 });

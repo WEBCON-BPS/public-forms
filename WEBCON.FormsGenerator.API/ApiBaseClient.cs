@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Net;
+using System.Net.Http;
 using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
@@ -43,18 +45,27 @@ namespace WEBCON.FormsGenerator.API
             if (string.IsNullOrEmpty(credentials?.ClientId) || string.IsNullOrEmpty(credentials?.ClientSecret))
                 throw new BpsClientDataException("Client login data have not been provided");
 
-            var response = await GetResponseAsync(CreateRequestFullUrl("/api/login"), JsonSerializer.Serialize(
-                  new
-                  {
-                      credentials.ClientId,
-                      credentials.ClientSecret
-                  }), null);
+            var response = await TryGetTokenAsync(credentials);
 
             if (response.status == HttpStatusCode.OK)
-                return JsonSerializer.Deserialize<Token>(response.response).token;
+                return JsonSerializer.Deserialize<Token>(response.response).access_token;
 
 
             throw CreateBpsClientDataException(response.response, response.status);
+        }
+
+        private async Task<(string response, HttpStatusCode status)> TryGetTokenAsync(Credentials credentials)
+        {
+            var url = CreateRequestFullUrl("/api/oauth2/token");
+            var parms = new Dictionary<string, string>
+            {
+                { "client_id", credentials.ClientId },
+                { "client_secret", credentials.ClientSecret },
+                { "grant_type", "client_credentials" }
+            };
+            var client = new HttpClient();
+            var response = await client.PostAsync(url, new FormUrlEncodedContent(parms));
+            return (await response.Content.ReadAsStringAsync(), response.StatusCode);
         }
 
         protected void OverrideCurrentToken(string token)
@@ -169,6 +180,6 @@ namespace WEBCON.FormsGenerator.API
     }
     internal struct Token
     {
-        public string token { get; set; }
+        public string access_token { get; set; }
     }
 }

@@ -136,8 +136,11 @@ namespace WEBCON.FormsGenerator.BusinessLogic.Application.Service
                         AddFormContentField(form, newField);
                 }
                 if (existingContentFields?.Any() ?? false)
+                {
+                    UpdateFormFields(form.BpsFormType, existingContentFields.Select(x => x.BpsFormField).ToList());
                     foreach (var existingField in existingContentFields)
                         UpdateFormContentField(existingField);
+                }                                    
 
                 if (removedContentFields?.Any() ?? false)
                     foreach (var removed in removedContentFields)
@@ -167,6 +170,26 @@ namespace WEBCON.FormsGenerator.BusinessLogic.Application.Service
         {
             return (!string.IsNullOrEmpty(clientId) && !string.IsNullOrEmpty(clientSecret)) ? (clientId, dataEncoding.Encode(clientSecret)) : (string.Empty, string.Empty);
         }
+
+
+        private void UpdateFormFields(Domain.Model.BpsFormType formType, List<DTO.FormField> fields)
+        {
+            var formFields = formUnitOfWork.BpsFormFields.GetFiltered(x => x.BPSFormType.Guid == formType.Guid).ToList();
+            foreach (DTO.FormField field in fields)
+            {
+                if (field == null) continue;
+                var currentField = formFields.FirstOrDefault(x => x.Guid.Equals(field.Guid));
+                if (currentField != null)
+                {
+                    if (field.Type != currentField.Type || field.Name != currentField.Name)
+                    {
+                        currentField.Update(field.Type, field.Name);
+                        formUnitOfWork.BpsFormFields.Update(currentField);
+                    }
+                }
+            }
+        }
+
         private void AddFormFields(Domain.Model.BpsFormType formType, List<DTO.FormField> fields)
         {
             var formFields = formUnitOfWork.BpsFormFields.GetFiltered(x => x.BPSFormType.Guid == formType.Guid).ToList();
@@ -199,6 +222,7 @@ namespace WEBCON.FormsGenerator.BusinessLogic.Application.Service
                 contentField.SetCustomName(contentFieldModel.CustomName);
                 contentField.SetIsRequired(contentFieldModel.IsRequired);
                 contentField.SetAllowMultipleValue(contentFieldModel.AllowMultipleValues);
+                contentField.BpsFormField.Type = contentFieldModel.BpsFormField.Type;
                 formUnitOfWork.FormContentFields.Update(contentField);
             }
         }

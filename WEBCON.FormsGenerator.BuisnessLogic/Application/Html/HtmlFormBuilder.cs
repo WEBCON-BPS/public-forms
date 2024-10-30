@@ -122,6 +122,21 @@ namespace WEBCON.FormsGenerator.BusinessLogic.Application.Html
             fieldNode.Remove();
             return ParseParametersFromHtmlAgilityOutput(html.DocumentNode.OuterHtml);
         }
+
+        public string UpdateField(Guid formContentFieldGuid, string formContent, string updatedHtml)
+        {          
+            HtmlAgilityPack.HtmlDocument html = new HtmlAgilityPack.HtmlDocument();
+            html.LoadHtml(formContent);
+            var fieldNode = html.DocumentNode.SelectSingleNode($"//div[@id='group-{formContentFieldGuid}']");
+            if (fieldNode != null)
+            {
+                var newNode = HtmlNode.CreateNode(updatedHtml);
+                fieldNode.ParentNode.ReplaceChild(newNode, fieldNode);
+            }
+            return ParseParametersFromHtmlAgilityOutput(html.DocumentNode.OuterHtml);
+        }
+
+
         private void RemoveParentNode(HtmlNode parent)
         {
             if (parent == null) return;

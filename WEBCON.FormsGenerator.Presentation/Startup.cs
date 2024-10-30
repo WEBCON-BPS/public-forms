@@ -5,9 +5,11 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Options;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
+using System.IO;
 using WEBCON.FormsGenerator.API;
 using WEBCON.FormsGenerator.BusinessLogic.Application.Html;
 using WEBCON.FormsGenerator.BusinessLogic.Application.Html.FormField;
@@ -18,6 +20,7 @@ using WEBCON.FormsGenerator.BusinessLogic.Domain.Service;
 using WEBCON.FormsGenerator.Data;
 using WEBCON.FormsGenerator.Presentation.Configuration;
 using WEBCON.FormsGenerator.Presentation.Configuration.Model;
+using WEBCON.FormsGenerator.Presentation.Features;
 using static WEBCON.FormsGenerator.BusinessLogic.Application.Html.FormField.HtmlFormFieldBuilder;
 
 namespace WEBCON.FormsGenerator.Presentation
@@ -36,19 +39,20 @@ namespace WEBCON.FormsGenerator.Presentation
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+            services.AddReadOnlyConfiguration(out var apiConfig);
             services.AddTransient<IDataEncoding, DataEncodingService>(serviceProvider =>
             {
-                var conf = Configuration.GetSection("APISettings")?.Get<ApiSettings>();
                 return new DataEncodingService()
                 {
-                    AppKey = conf?.AppKey
+                    AppKey = apiConfig.AppKey
                 };
             });
             services.AddScoped<IFormUnitOfWork, FormGeneratorUnitOfWork>();
             services.AddScoped<IFormCommandService, FormCommandService>();
             services.AddScoped<IFormQueryService, FormQueryService>();
             services.AddTransient<IFormBuilder, HtmlFormBuilder>();
-            AddBpsClients(services);
+            AddBpsClients(services, apiConfig);
+            CheckDbFolder();
             services.AddTransient<IFormContentService, FormContentService>();
             services.AddScoped<IBpsQueryService, BpsQueryService>();
             services.AddScoped<IBpsStartElementService, BpsStartElementService>();
@@ -60,8 +64,6 @@ namespace WEBCON.FormsGenerator.Presentation
             {
                 return new FormFieldFactory(new BpsFormFieldBuilder(), new HtmlFormValueBuilder());
             });
-            services.ConfigureWritable<ApiSettings>(Configuration.GetSection("APISettings"));
-            services.ConfigureWritable<CaptchaSettings>(Configuration.GetSection("CaptchaSettings"));
             services.ConfigureWritable<Logging>(Configuration.GetSection("Logging"));
             services.AddRazorPages();
             services.AddControllersWithViews().AddRazorRuntimeCompilation();
@@ -87,22 +89,31 @@ namespace WEBCON.FormsGenerator.Presentation
 
         }
 
-        private void AddBpsClients(IServiceCollection services)
+        private void CheckDbFolder()
         {
-            var conf = Configuration.GetSection("APISettings")?.Get<Configuration.Model.ApiSettings>();
-            var credentials = new BusinessLogic.Application.DTO.Credentials(conf?.ClientId, conf?.ClientSecret);
+            if (!Directory.Exists("db"))
+                Directory.CreateDirectory("db");
+        }
 
+        private void AddBpsClients(IServiceCollection services, ApiSettings config)
+        {
+            var credentials = new BusinessLogic.Application.DTO.Credentials(config.ClientId, config.ClientSecret);
             services.AddScoped<IBpsClientQueryService, BpsApiQueryClient>(serviceProvider =>
-                new BpsApiQueryClient(conf?.Url, conf?.DatabaseId ?? 1, new FormFieldFactory(new HtmlFormFieldBuilder(), new BpsFormFieldValueBuilder()), credentials)
+                new BpsApiQueryClient(config.Url, config.DatabaseId, new FormFieldFactory(new HtmlFormFieldBuilder(), new BpsFormFieldValueBuilder()), credentials)
             );
             services.AddScoped<IBpsClientCommandService, BpsApiCommandClient>(serviceProvider =>
-                new BpsApiCommandClient(conf?.Url, conf?.DatabaseId ?? 1, credentials)
+                new BpsApiCommandClient(config.Url, config.DatabaseId, credentials)
             );
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            
+            var basePath = Environment.GetEnvironmentVariable("APP_BASE_DOMAIN");
+            if (!string.IsNullOrEmpty(basePath))
+                app.UseCustomHost(basePath);
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();

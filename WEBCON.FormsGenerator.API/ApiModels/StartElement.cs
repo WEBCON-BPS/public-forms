@@ -17,9 +17,6 @@
     internal class StartElementFormField : IdentityModel
     {
         public object value { get; set; }
-        public string type { get; set; }
-        public string svalue { get; set; }
-        public string name { get; set; }
     }
     internal class StartElementValueChoices
     {

@@ -50,7 +50,13 @@ namespace WEBCON.FormsGenerator.BusinessLogic.Application.Service
                     else
                     {
                         if (formField is IChoice choiceableField)
-                           body = formBuilder.UpdateChoices(formField, body);                        
+                           body = formBuilder.UpdateChoices(formField, body);
+                        
+                        if(existingContentField.BpsFormField.Type != formField.Type)
+                        {
+                            string field = formContentService.CreateFormContentInput(formField);
+                            body = formBuilder.UpdateField(existingContentField.BpsFormField.Guid, body, field);
+                        }
                     }
                 }
                 foreach (var contentField in contentFields)

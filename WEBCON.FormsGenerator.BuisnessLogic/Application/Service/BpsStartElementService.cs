@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Extensions.Logging;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -15,13 +16,16 @@ namespace WEBCON.FormsGenerator.BusinessLogic.Application.Service
         private readonly IFormUnitOfWork formUnitOfWork;
         private readonly IDataEncoding dataEncoding;
         private readonly IFormFieldFactory formFieldBuilder;
+        private readonly ILogger<BpsStartElementService> logger;
 
-        public BpsStartElementService(IBpsClientCommandService clientService, IFormUnitOfWork formUnitOfWork, IDataEncoding dataEncoding, IFormFieldFactory formFieldBuilder)
+        public BpsStartElementService(IBpsClientCommandService clientService, IFormUnitOfWork formUnitOfWork,
+            IDataEncoding dataEncoding, IFormFieldFactory formFieldBuilder, ILogger<BpsStartElementService> logger)
         {
             this.clientService = clientService ?? throw new ApplicationArgumentException("Client service instance has not been provided");
             this.formUnitOfWork = formUnitOfWork ?? throw new ApplicationArgumentException("Data source instance has not been initialized.");
             this.dataEncoding = dataEncoding;
             this.formFieldBuilder = formFieldBuilder ?? throw new ApplicationArgumentException("Client service instance has not been provided");
+            this.logger = logger;
         }
 
         public Task<StartElementResult> Start(IEnumerable<KeyValuePair<Guid, object>> fields, Guid formGuid)
@@ -39,7 +43,7 @@ namespace WEBCON.FormsGenerator.BusinessLogic.Application.Service
 
             var customCredentials = CreateCustomCredentials(form.ClientId, form.ClientSecret);
             return clientService.StartElement(GetStartElementFields(fields, formFields), form.BpsStepPath?.BpsWorkflowStep?.BpsWorkflow?.Guid??Guid.Empty, 
-                form.BpsFormType?.Guid?? Guid.Empty, form.BpsStepPath?.Guid?? Guid.Empty, form.BusinessEntityGuid, customCredentials);
+                form.BpsFormType?.Guid?? Guid.Empty, form.BpsStepPath?.Guid?? Guid.Empty, form.BusinessEntityGuid, logger, customCredentials);
         }
 
         private List<FormField> GetStartElementFields(IEnumerable<KeyValuePair<Guid, object>> fields, IEnumerable<Domain.Model.BpsFormField> formFields)

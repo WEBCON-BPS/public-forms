@@ -66,5 +66,6 @@ namespace WEBCON.FormsGenerator.BusinessLogic.Application.Interface
         /// <param name="formContent">Existing form content</param>
         /// <returns></returns>
         string RemoveFieldFromExistingForm(Guid bpsformFieldGuid, string formContent);
+        string UpdateField(Guid formContentFieldGuid, string formContent, string updatedHtml);
     }
 }

@@ -17,7 +17,7 @@ namespace WEBCON.FormsGenerator.API.FormField
         public override object ValueToBps()
         {
             if (Value.Value == null) return null;
-            return JsonSerializer.Serialize(DateTime.Parse(Value.Value.ToString()));
+            return DateTime.Parse(Value.Value.ToString()).ToString("yyyy-MM-dd");
         }
     }
 }

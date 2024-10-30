@@ -14,31 +14,20 @@
                     <h4 class="pb-3 pt-3">@Localizer["WEBCON BPS API configuration"]</h4>
                     <div class="form-group">
                         <label asp-for="ApiUrl" class="control-label"></label>
-                        <input asp-for="ApiUrl" class="form-control" />
+                        <input asp-for="ApiUrl" class="form-control" readonly="readonly" />
                         <span asp-validation-for="ApiUrl" class="text-danger"></span>
                     </div>
-                    @{if (Model.IsHostedOnAzure)
-                        {
-                            <label class="label-small">Changing client credentials in app configuration is unavailable for this hosting environment.</label>
-                        }
-                    }
                     <div class="form-group">
                         <label asp-for="ClientId" class="control-label"></label>
-                        <input asp-for="ClientId" class="form-control" readonly="@(Model.IsHostedOnAzure ? "readonly" : null)" />
+                        <input asp-for="ClientId" class="form-control" readonly="readonly" />
                         <span asp-validation-for="ClientId" class="text-danger"></span>
                     </div>
-                    <div class="form-group">
-                        <label asp-for="ClientSecret" class="control-label"></label>
-                        <input asp-for="ClientSecret" class="form-control" type="password" value="@Model.ClientSecret" readonly="@(Model.IsHostedOnAzure ? "readonly" : null)" />
-                        <span asp-validation-for="ClientSecret" class="text-danger"></span>
-                    </div>
-
                     <button type="button" id="test-connection" class="btn btn-secondary">@Localizer["Test connection"]</button>
                     <div id="test-result"></div>
 
                     <div class="form-group">
                         <label asp-for="DatabaseId" class="control-label"></label>
-                        <input asp-for="DatabaseId" class="form-control" type="number" value="@Model.DatabaseId" />
+                        <input asp-for="DatabaseId" class="form-control" type="number" value="@Model.DatabaseId" readonly="readonly" />
                         <span asp-validation-for="DatabaseId" class="text-danger"></span>
                     </div>
                 </section>
@@ -46,7 +35,7 @@
                     <h4 class="pt-3 pb-3">@Localizer["Captcha configuration"]</h4>
                     <div class="form-group">
                         <label asp-for="CaptchaApiKey" class="control-label"></label>
-                        <input asp-for="CaptchaApiKey" class="form-control" />
+                        <input asp-for="CaptchaApiKey" class="form-control" readonly="readonly" />
                         <span asp-validation-for="CaptchaApiKey" class="text-danger"></span>
                     </div>
                 </section>

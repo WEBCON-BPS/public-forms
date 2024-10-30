@@ -10,6 +10,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Localization;
 using Moq;
 using NUnit.Framework;
+using WEBCON.FormsGenerator.Presentation.Configuration.Model;
 using WEBCON.FormsGenerator.Presentation.Controllers;
 using WEBCON.FormsGenerator.Presentation.ViewModels;
 
@@ -21,7 +22,7 @@ namespace WEBCON.FormsGenerator.Test.Presentation
         [Test]
         public void ShouldReturnLoginView()
         {
-            var configMoq = new Moq.Mock<IConfiguration>();
+            var configMoq = new Moq.Mock<IReadOnlyConfiguration>();
             var localizer = new Moq.Mock<IStringLocalizer<AccountController>>();
             AccountController controller = new AccountController(configMoq.Object, null, localizer.Object);
 
@@ -71,14 +72,9 @@ namespace WEBCON.FormsGenerator.Test.Presentation
         }
         private AccountController GetController()
         {
-            var inMemorySettings = new Dictionary<string, string> {
-                {"Login", "login"},
-                {"Password", "password"},
-            };
-
-            IConfiguration configuration = new ConfigurationBuilder()
-                .AddInMemoryCollection(inMemorySettings)
-                .Build();
+            var configurationMock = new Mock<IReadOnlyConfiguration>();
+            configurationMock.Setup(c => c.ApiSettings.ClientId).Returns("login");
+            configurationMock.Setup(c => c.ApiSettings.ClientSecret).Returns("pass");
 
             var asMoq = new Mock<IAuthenticationService>();
             asMoq.Setup(_ => _.SignInAsync(It.IsAny<HttpContext>(), It.IsAny<string>(), It.IsAny<ClaimsPrincipal>(), It.IsAny<AuthenticationProperties>()))
@@ -93,7 +89,7 @@ namespace WEBCON.FormsGenerator.Test.Presentation
             TempDataDictionaryFactory tempDataDictionaryFactory = new TempDataDictionaryFactory(tempDataProvider);
             var localizer = new Moq.Mock<IStringLocalizer<AccountController>>();
             localizer.Setup(_ => _["Invalid credentials"]).Returns(new LocalizedString("Invalid credentials", "Invalid UserName or Password"));
-            return new AccountController(configuration, null, localizer.Object)
+            return new AccountController(configurationMock.Object, null, localizer.Object)
             {
                 Url = Mock.Of<IUrlHelper>(),
                 TempData = tempDataDictionaryFactory.GetTempData(new DefaultHttpContext()),

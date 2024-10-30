@@ -8,17 +8,18 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Localization;
 using Microsoft.Extensions.Logging;
+using WEBCON.FormsGenerator.Presentation.Configuration.Model;
 using WEBCON.FormsGenerator.Presentation.ViewModels;
 
 namespace WEBCON.FormsGenerator.Presentation.Controllers
 {
     public class AccountController : Controller
     {
-        private readonly IConfiguration configuration;
+        private readonly IReadOnlyConfiguration configuration;
         private readonly ILogger<AccountController> logger;
         private readonly IStringLocalizer<AccountController> localizer;
 
-        public AccountController(IConfiguration configuration, ILogger<AccountController> logger, IStringLocalizer<AccountController> localizer)
+        public AccountController(IReadOnlyConfiguration configuration, ILogger<AccountController> logger, IStringLocalizer<AccountController> localizer)
         {
             this.configuration = configuration;
             this.logger = logger;
@@ -34,8 +35,8 @@ namespace WEBCON.FormsGenerator.Presentation.Controllers
         {
             try
             {
-                var password = configuration["Password"];
-                var login = configuration["Login"];
+                var password = configuration.AdditionalSettings.Password;
+                var login = configuration.AdditionalSettings.Login;
                 if (string.IsNullOrEmpty(password) || string.IsNullOrEmpty(login))
                 {
                     ModelState.AddModelError("", localizer["Login config section is not configured"]);

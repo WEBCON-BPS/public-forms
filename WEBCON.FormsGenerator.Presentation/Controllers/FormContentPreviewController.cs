@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Linq;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Configuration;
 using WEBCON.FormsGenerator.BusinessLogic.Application.DTO;
 using WEBCON.FormsGenerator.BusinessLogic.Application.Helper;
 using WEBCON.FormsGenerator.BusinessLogic.Application.Interface;
@@ -14,9 +12,9 @@ namespace WEBCON.FormsGenerator.Presentation.Controllers
     public class FormContentPreviewController : Controller
     {
         private readonly IFormQueryService formQueryService;
-        private readonly IConfiguration configuration;
+        private readonly IReadOnlyConfiguration configuration;
 
-        public FormContentPreviewController(IConfiguration configuration, IFormQueryService formQueryService)
+        public FormContentPreviewController(IReadOnlyConfiguration configuration, IFormQueryService formQueryService)
         {
             this.configuration = configuration;
             this.formQueryService = formQueryService;
@@ -34,7 +32,6 @@ namespace WEBCON.FormsGenerator.Presentation.Controllers
             else
                 HttpContext.Response.Headers.Add("Content-Security-Policy", @$"frame-ancestors *");
 
-            string key = configuration.GetSection("CaptchaSettings")?.Get<CaptchaSettings>().APIKey;
             return View(new FormContentPreviewViewModel
             {
                 Html = form.ContentTransformed,
@@ -42,7 +39,7 @@ namespace WEBCON.FormsGenerator.Presentation.Controllers
                 CustomCssLink = form.CustomCssLink,
                 IsCaptchaRequired = form.IsCaptchaRequired,
                 UseStandardBootstrapStyle = form.UseStandardBootstrapStyle,
-                CaptchaKey = key,
+                CaptchaKey = configuration.CaptchaSettings.APIKey,
                 FormGuid = form.Guid,
                 ContentSubmitProcessingText = form.ContentSubmitProcessingText,
                 ContentSubmitSuccessMessage = string.IsNullOrEmpty(form.ContentSubmitSuccessMessage) ? $"Successfully added element with signature {FormParameters.Signature}" : form.ContentSubmitSuccessMessage,

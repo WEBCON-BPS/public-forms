@@ -81,6 +81,7 @@
         @if (Model.Id > 0)
         {
             <button class="btn btn-secondary" type="button" id="refresh-form"><i id="refresh-icon" class="fas fa-sync-alt"></i> @Localizer["Refresh"]</button>
+            <i data-toggle="tooltip" data-placement="right" class="fas fa-info-circle fa-lg" title="@Localizer["RefreshInfo"]"></i>
         }
     <div id="metadata-list">
         <div id="fields-loading-icon-container"><i id="fields-loading-icon" class="fas fa-sync-alt"></i></div>
@@ -123,7 +124,7 @@
             <button type="button" class="tablinks active" id="button-html-meta">@Localizer["HTML Editing"]</button>
             <button type="button" class="tablinks" id="button-css">CSS</button>
             <button type="button" class="tablinks" id="button-preview">@Localizer["HTML Preview"]</button>
-            <button type="button" class="tablinks bg-dark float-right" id="button-run" data-toggle="modal" data-target="#formPreviewModal">@Localizer["Show preview"] <i class="fas fa-angle-double-right"></i></button>
+            <button type="button" class="tablinks bg-dark float-end" id="button-run" data-bs-toggle="modal" data-bs-target="#formPreviewModal">@Localizer["Show preview"] <i class="fas fa-angle-double-right"></i></button>
         </div>
         <div id="form-html-metadata" class="tabcontent">
             <textarea spellcheck="false" asp-for="Content" id="content" rows="20" class="tabcontent-text"></textarea>
@@ -140,8 +141,8 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="formPreviewModalTitle">@Localizer["HTML Form preview"]</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="@Localizer["Close"]">
-                        <span aria-hidden="true">&times;</span>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="@Localizer["Close"]">
+                      
                     </button>
                 </div>
                 <div class="modal-body" id="formDisplay">
@@ -154,7 +155,7 @@
                                 })" title="WEBCON Forms Generator IFrame" id="frame-preview"></iframe>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">@Localizer["Close"]</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">@Localizer["Close"]</button>
                 </div>
             </div>
         </div>
