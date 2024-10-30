@@ -16,7 +16,7 @@ jobs:
       run: |
         dotnet publish -c Release -r win-x86 WEBCON.FormsGenerator.Presentation/ -o ./WEBCON.FormsGenerator.Presentation/Release
     - name: Deploy artifact
-    - uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v3
       with:
         name: PublicForms
         path: |
