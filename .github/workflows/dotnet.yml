@@ -14,10 +14,10 @@ jobs:
         dotnet-version: 8.0.x 
     - name: Publish
       run: |
-        dotnet publish -c Release -r win-x86 WEBCON.FormsGenerator.Presentation/ -o ./WEBCON.FormsGenerator.Presentation/Release
+        dotnet publish -c Release WEBCON.FormsGenerator.Presentation/ -p:PublishProfile=FolderProfilex64
     - name: Deploy artifact
       uses: actions/upload-artifact@v3
       with:
         name: PublicForms
         path: |
-          WEBCON.FormsGenerator.Presentation/Release/
+          WEBCON.FormsGenerator.Presentation/bin/Publish
