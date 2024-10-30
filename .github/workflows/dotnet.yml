@@ -14,7 +14,7 @@ jobs:
         dotnet-version: 8.0.x 
     - name: Publish
       run: |
-        dotnet publish -c Release WEBCON.FormsGenerator.Presentation/ -p:PublishProfile=FolderProfilex64
+        dotnet build -c Release WEBCON.FormsGenerator.Presentation/ -p:DeployOnBuild=true -p:PublishProfile=FolderProfilex64
     - name: Deploy artifact
       uses: actions/upload-artifact@v3
       with:
