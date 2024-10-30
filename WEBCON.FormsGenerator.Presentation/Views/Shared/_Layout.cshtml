@@ -36,9 +36,10 @@
         </div>
     </div>
     <footer class="border-top footer text-muted">
-        <div class="container mr-0 d-flex flex-row">
-            <div class="ml-auto"> &copy; 2021 - WEBCON Forms Generator</div>
-            <div class="ml-5"> @await Html.PartialAsync("_SelectLanguagePartial")</div>
+        <div class="d-flex flex-row-reverse ">
+            <div class="ms-4 me-2"> @await Html.PartialAsync("_SelectLanguagePartial")</div>
+            <div> &copy; @DateTime.Now.Year - WEBCON Forms Generator</div>
+          
         </div>
     </footer>
     <script src="~/lib/jquery/jquery.min.js"></script>

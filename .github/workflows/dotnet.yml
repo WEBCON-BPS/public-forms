@@ -1,0 +1,23 @@
+name: .NET
+
+on:
+  workflow_dispatch:
+  
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v2
+      with:
+        dotnet-version: 6.0.x 
+    - name: Publish
+      run: |
+        dotnet publish -c Release -r win-x86 WEBCON.FormsGenerator.Presentation/ -o ./WEBCON.FormsGenerator.Presentation/Release
+    - name: Deploy artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: PublicForms
+        path: |
+          WEBCON.FormsGenerator.Presentation/Release/

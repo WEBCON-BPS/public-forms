@@ -9,29 +9,27 @@ namespace WEBCON.FormsGenerator.Presentation.Controllers
 {
     public class ConfigurationController : Controller
     {
-        private readonly IWritableOptions<ApiSettings> apiConfiguration;
-        private readonly IWritableOptions<CaptchaSettings> captchaConfiguration;
         private readonly IWritableOptions<Logging> loggingConfiguration;
         private readonly IStringLocalizer<ConfigurationController> localizer;
+        private readonly IReadOnlyConfiguration config;
 
         private bool IsHostedOnAzure => !String.IsNullOrEmpty(Environment.GetEnvironmentVariable("WEBSITE_SITE_NAME"));
-        public ConfigurationController(IWritableOptions<ApiSettings> apiConfiguration, IWritableOptions<CaptchaSettings> captchaConfiguration, IWritableOptions<Logging> loggingConfiguration, IStringLocalizer<ConfigurationController> localizer)
+        public ConfigurationController(IWritableOptions<Logging> loggingConfiguration, IStringLocalizer<ConfigurationController> localizer, IReadOnlyConfiguration config)
         {
-            this.apiConfiguration = apiConfiguration;
-            this.captchaConfiguration = captchaConfiguration;
             this.loggingConfiguration = loggingConfiguration;
             this.localizer = localizer;
+            this.config = config;
         }
         [Authorize]
         public IActionResult Index()
         {
             ViewModels.ConfigurationViewModel model = new ViewModels.ConfigurationViewModel()
             {
-                ApiUrl = apiConfiguration?.Value.Url,
-                ClientId = apiConfiguration?.Value.ClientId,
-                DatabaseId = apiConfiguration?.Value.DatabaseId ?? 0,
-                CaptchaApiKey = captchaConfiguration?.Value.APIKey ?? string.Empty,
-                ClientSecret = apiConfiguration?.Value.ClientSecret,
+                ApiUrl = config.ApiSettings.Url,
+                ClientId = config.ApiSettings.ClientId,
+                DatabaseId = config.ApiSettings.DatabaseId,
+                CaptchaApiKey = config.CaptchaSettings.APIKey ?? string.Empty,
+                ClientSecret = config.ApiSettings.ClientSecret,
                 LoggingLevel = loggingConfiguration?.Value.LogLevel.Default,
                 IsHostedOnAzure = IsHostedOnAzure
             };
@@ -42,22 +40,6 @@ namespace WEBCON.FormsGenerator.Presentation.Controllers
         [Authorize]
         public IActionResult Index(ViewModels.ConfigurationViewModel model)
         {
-            if (apiConfiguration != null)
-            {
-                if (string.IsNullOrEmpty(apiConfiguration.Value.AppKey))
-                    apiConfiguration.Update(x => x.AppKey = Guid.NewGuid().ToString());
-                apiConfiguration.Update(x => x.Url = model.ApiUrl);
-                if (!IsHostedOnAzure)
-                {
-                    apiConfiguration.Update(x => x.ClientId = model.ClientId);
-                    apiConfiguration.Update(x => x.ClientSecret = model.ClientSecret);
-                }
-                apiConfiguration.Update(x => x.DatabaseId = model.DatabaseId);
-            }
-            if(captchaConfiguration !=null)
-            {
-                captchaConfiguration.Update(x => x.APIKey = model.CaptchaApiKey);
-            }
             if(loggingConfiguration!=null && model.LoggingLevel!=null)
             {
                 loggingConfiguration.Update(x => x.LogLevel.Default = model.LoggingLevel);

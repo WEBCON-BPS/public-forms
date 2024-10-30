@@ -123,4 +123,7 @@
   <data name="Refresh" xml:space="preserve">
     <value>Refresh fields</value>
   </data>
+  <data name="RefreshInfo" xml:space="preserve">
+    <value>If the field type has been changed, all manual changes in html for this field will be lost</value>
+  </data>
 </root>

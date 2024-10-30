@@ -9,7 +9,7 @@
     <form asp-action="Create">
         <div class="d-flex justify-content-between w-100 pt-3 pb-3">
             <div class="w-50"><h3>@Localizer["New form"]</h3></div>
-            <div class="w-50 text-right">
+            <div class="w-50 text-end">
                 <input type="submit" value="@Localizer["Save and Activate Form"]" class="btn btn-secondary" />
             </div>
             <hr />
@@ -18,7 +18,7 @@
         @{await Html.RenderPartialAsync("_FormCommon", Model); }
         @{await Html.RenderPartialAsync("_FormCommonBpsSelectList", Model); }
         @{await Html.RenderPartialAsync("_HtmlEditor", Model); }
-        <input type="submit" value="@Localizer["Save and Activate Form"]" class="btn btn-secondary mt-3 float-right" />
+        <input type="submit" value="@Localizer["Save and Activate Form"]" class="btn btn-secondary mt-3 float-end" />
     </form>
 </div>
 @section Scripts {

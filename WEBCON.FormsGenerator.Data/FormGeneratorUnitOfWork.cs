@@ -22,7 +22,7 @@ namespace WEBCON.FormsGenerator.Data
         private readonly LiteDatabase db;
         public FormGeneratorUnitOfWork()
         {
-            db = new LiteDatabase(@"Filename=formsgenerator.db; Connection=shared");
+            db = new LiteDatabase(@"Filename=db/formsgenerator.db; Connection=shared");
         }
 
         public IFormRepository Forms

@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using WEBCON.FormsGenerator.BusinessLogic.Application.DTO;
 using WEBCON.FormsGenerator.BusinessLogic.Domain.Exceptions;
 using WEBCON.FormsGenerator.API.FormField;
+using Microsoft.Extensions.Logging;
 
 namespace WEBCON.FormsGenerator.API
 {
@@ -20,9 +21,9 @@ namespace WEBCON.FormsGenerator.API
         public BpsApiCommandClient(string apiUrl, int databaseId, Credentials credentials) : base(apiUrl, credentials)
         {
             this.databaseId = databaseId.Equals(0) ? 1 : databaseId;
-            apiMainPath = $"/api/data/beta/db/{databaseId}";
+            apiMainPath = $"/api/data/v6.0/db/{databaseId}";
         }    
-        public async Task<BusinessLogic.Application.DTO.StartElementResult> StartElement(IEnumerable<BusinessLogic.Application.DTO.FormField> fields, Guid workflowGuid, Guid formTypeGuid, Guid stepPathGuid, Guid businessEntityGuid, Credentials customCredentials = null)
+        public async Task<BusinessLogic.Application.DTO.StartElementResult> StartElement(IEnumerable<BusinessLogic.Application.DTO.FormField> fields, Guid workflowGuid, Guid formTypeGuid, Guid stepPathGuid, Guid businessEntityGuid, ILogger logger, Credentials customCredentials = null)
         {
             List<StartElementFormField> startFields = new List<StartElementFormField>();
             if(!(fields.Cast<BpsBaseField>() is IEnumerable<BpsBaseField> bpsFields))
@@ -50,7 +51,8 @@ namespace WEBCON.FormsGenerator.API
                 workflow = new IdentityModel { guid = workflowGuid.ToString() },
                 formFields = startFields.ToArray()
             };
-            string requestData = JsonSerializer.Serialize(element, new JsonSerializerOptions() { IgnoreNullValues = true });
+            string requestData = JsonSerializer.Serialize(element, new JsonSerializerOptions());
+            logger.LogDebug(requestData);
             var requestUrl = CreateRequestFullUrl($"{apiMainPath}/elements?db={databaseId}&path={((stepPathGuid != Guid.Empty) ? stepPathGuid.ToString() : "default")}");
 
             (string response, HttpStatusCode status) response;

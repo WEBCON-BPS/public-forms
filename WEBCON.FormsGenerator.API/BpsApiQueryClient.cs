@@ -19,7 +19,7 @@ namespace WEBCON.FormsGenerator.API
 
         public BpsApiQueryClient(string apiUrl, int databaseId, IFormFieldFactory fieldFactory, Credentials credentials) : base(apiUrl, credentials)
         {
-            _apiMainPath = $"/api/data/beta/db/{(databaseId.Equals(0) ? 1 : databaseId)}";
+            _apiMainPath = $"/api/data/v6.0/db/{(databaseId.Equals(0) ? 1 : databaseId)}";
             _databaseId = databaseId;
             _fieldFactory = fieldFactory;
         }
@@ -52,7 +52,20 @@ namespace WEBCON.FormsGenerator.API
         public async Task<BpsStep> GetStartStepAsync(Guid workflowGuid)
         {
             var steps = await GetApiMetadata<BpsStep>($"workflows/{workflowGuid}/steps", (response) => { return JsonSerializer.Deserialize<Steps>(response).steps; });
-            return steps?.FirstOrDefault();
+            return await FindStartStepAsync(steps);
+        }
+
+        private async Task<BpsStep> FindStartStepAsync(IEnumerable<BpsStep> steps)
+        {
+            if(steps != null)
+            foreach (var step in steps)
+            {
+                var response = await SendRequestAsync(CreateRequestFullUrl($"{_apiMainPath}/steps/{step.Guid}"), null, "GET");
+                if (response.status == HttpStatusCode.OK)
+                    if (JsonSerializer.Deserialize<BpsStep>(response.response).Type.Equals("Start"))
+                        return step;              
+            }
+            return null;
         }
 
         public async Task<IEnumerable<BpsPath>> GetStepPaths(Guid stepGuid)
@@ -62,7 +75,7 @@ namespace WEBCON.FormsGenerator.API
 
         public async Task<IEnumerable<BpsBusinessEntity>> GetBusinessEntities()
         {
-            _apiMainPath = $"/api/data/beta/admin/db/{_databaseId}";
+            _apiMainPath = $"/api/data/v6.0/admin/db/{_databaseId}";
             return await GetApiMetadata<BpsBusinessEntity>("businessentities", (response) => { return JsonSerializer.Deserialize<BusinessEntities>(response).businessEntities; });
         }
 

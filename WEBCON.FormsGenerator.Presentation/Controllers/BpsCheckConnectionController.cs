@@ -5,6 +5,7 @@ using System;
 using System.Threading.Tasks;
 using WEBCON.FormsGenerator.BusinessLogic.Application.DTO;
 using WEBCON.FormsGenerator.BusinessLogic.Application.Interface;
+using WEBCON.FormsGenerator.Presentation.Configuration.Model;
 using WEBCON.FormsGenerator.Presentation.ViewModels;
 
 namespace WEBCON.FormsGenerator.Presentation.Controllers
@@ -13,22 +14,26 @@ namespace WEBCON.FormsGenerator.Presentation.Controllers
     {
         private readonly IBpsCheckConnectionService checkConnectionService;
         private readonly IStringLocalizer<BpsCheckConnectionController> localizer;
+        private readonly IReadOnlyConfiguration _config;
 
-        public BpsCheckConnectionController(IBpsCheckConnectionService checkConnectionService, IStringLocalizer<BpsCheckConnectionController> localizer)
+        public BpsCheckConnectionController(IBpsCheckConnectionService checkConnectionService, IStringLocalizer<BpsCheckConnectionController> localizer,
+            IReadOnlyConfiguration config)
         {
             this.checkConnectionService = checkConnectionService;
             this.localizer = localizer;
+            _config = config;
         }
         [HttpPost]
         [Authorize]
-        public async Task<JsonResult> CheckConnection(string apiUrl, string apiClientId, string apiClientSecret)
+        public async Task<JsonResult> CheckConnection()
         {
             try
             {
-                if (string.IsNullOrEmpty(apiUrl) || string.IsNullOrEmpty(apiClientId) || string.IsNullOrEmpty(apiClientSecret))
+                if (string.IsNullOrEmpty(_config.ApiSettings.Url) || string.IsNullOrEmpty(_config.ApiSettings.ClientId) || string.IsNullOrEmpty(_config.ApiSettings.ClientSecret))
                     return new JsonResult(new CheckConnectionResultViewModel { IsConnected = false, ResultMessage = localizer?["Data for login not provided"] ?? "Data for login not provided" });
 
-                CheckConnectionResult response = await checkConnectionService.CheckConnection(apiClientId, apiClientSecret, apiUrl);
+                CheckConnectionResult response = 
+                    await checkConnectionService.CheckConnection(_config.ApiSettings.ClientId, _config.ApiSettings.ClientSecret, _config.ApiSettings.Url);
                 return new JsonResult(new CheckConnectionResultViewModel { IsConnected = response.IsConnected, ResultMessage = localizer?[response.ResultMessage]?.Value??response.ResultMessage });
             }
             catch (Exception ex)

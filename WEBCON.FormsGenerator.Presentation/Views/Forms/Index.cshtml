@@ -10,9 +10,9 @@
         <div><a asp-action="Create" asp-controller="Form" class="btn btn-secondary btn-sm"><i class="fas fa-plus"></i> @Localizer["Add"]</a></div>
         <div class="text-left">
             <form asp-action="Index" method="get" class="d-flex flex-column flex-lg-row float-lg-right mb-3">
-                <div class="col-form-label">@Localizer["Find by name"]</div>
+                <div class="col-form-label me-2">@Localizer["Find by name"]</div>
                 <div class="d-flex flex-row">
-                    <input type="search" class="form-control mr-sm-2 ml-sm-2" name="SearchString" placeholder="@Localizer["Search"]" aria-label="Search" value="@ViewData["CurrentFilter"]" />
+                    <input type="search" class="form-control mr-sm-2 ml-sm-2 me-2" name="SearchString" placeholder="@Localizer["Search"]" aria-label="Search" value="@ViewData["CurrentFilter"]" />
                     <button type="submit" class="btn btn-secondary btn-sm"><i class="fas fa-search"></i></button>
                 </div>
             </form>

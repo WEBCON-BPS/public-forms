@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.30717.126
+# Visual Studio Version 17
+VisualStudioVersion = 17.9.34728.123
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Test", "Test", "{C3192F63-41F0-481F-B291-181F61DD5417}"
 EndProject
@@ -20,18 +20,6 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{C319945C-93AC-406E-9BB5-BE7C3D820F2A}"
 	ProjectSection(SolutionItems) = preProject
 		README.md = README.md
-	EndProjectSection
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "AzureScripts", "AzureScripts", "{6C43E3F8-DE50-42FB-B72E-12EA99349E91}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "AppService", "AppService", "{EBAB460D-A522-4D7B-9DB8-B98B3521A140}"
-	ProjectSection(SolutionItems) = preProject
-		build\AzureScripts\AppService\template.json = build\AzureScripts\AppService\template.json
-	EndProjectSection
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "KeyVault", "KeyVault", "{B7E6E34E-478B-4A17-9BC9-C2236F40CE24}"
-	ProjectSection(SolutionItems) = preProject
-		build\AzureScripts\KeyVault\template.json = build\AzureScripts\KeyVault\template.json
 	EndProjectSection
 EndProject
 Global
@@ -90,8 +78,6 @@ Global
 		{AE83AEE5-BA1F-4424-890B-64B16489E488} = {58280BAA-38E3-4018-9264-C2E4672F3E0C}
 		{B8FDD36D-A5AF-4DEA-A5B4-381AD225376B} = {C3192F63-41F0-481F-B291-181F61DD5417}
 		{9966A254-F5D0-473E-8964-89BBDA0EDE1B} = {58280BAA-38E3-4018-9264-C2E4672F3E0C}
-		{EBAB460D-A522-4D7B-9DB8-B98B3521A140} = {6C43E3F8-DE50-42FB-B72E-12EA99349E91}
-		{B7E6E34E-478B-4A17-9BC9-C2236F40CE24} = {6C43E3F8-DE50-42FB-B72E-12EA99349E91}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {F80AB311-736E-4A49-B1C6-5C8B8AF6131A}

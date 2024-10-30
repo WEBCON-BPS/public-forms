@@ -1,4 +1,5 @@
-﻿using Moq;
+﻿using Microsoft.Extensions.Logging;
+using Moq;
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;
@@ -61,9 +62,9 @@ namespace WEBCON.FormsGenerator.Test.BusinessLogic
             dbMoq.Setup(x => x.Forms).Returns(formR.Object);
             var encoding = new Moq.Mock<IDataEncoding>();
 
-            clientService.Setup(x => x.StartElement(It.IsAny<IEnumerable<FormsGenerator.BusinessLogic.Application.DTO.FormField>>(), It.IsAny<Guid>(), It.IsAny<Guid>(), It.IsAny<Guid>(), It.IsAny<Guid>(), null))
+            clientService.Setup(x => x.StartElement(It.IsAny<IEnumerable<FormsGenerator.BusinessLogic.Application.DTO.FormField>>(), It.IsAny<Guid>(), It.IsAny<Guid>(), It.IsAny<Guid>(), It.IsAny<Guid>(), new Moq.Mock<ILogger>().Object, null))
                 .Returns(Task.FromResult(new StartElementResult { Id = 1212, Number = "P/124", Status = "MovedToTheNextStep" }));
-            BpsStartElementService bpsFormService = new BpsStartElementService(clientService.Object, dbMoq.Object, encoding.Object, new FormFieldFactory(new BpsFormFieldBuilder(),new HtmlFormValueBuilder()));
+            BpsStartElementService bpsFormService = new BpsStartElementService(clientService.Object, dbMoq.Object, encoding.Object, new FormFieldFactory(new BpsFormFieldBuilder(),new HtmlFormValueBuilder()), new Moq.Mock<ILogger<BpsStartElementService>>().Object);
             var result = await bpsFormService.Start(new List<KeyValuePair<Guid, object>>
             { new KeyValuePair<Guid,object>(dateGuid,"2020-05-05") ,
              new KeyValuePair<Guid, object>(boolean1Guid, "on"),
@@ -83,7 +84,7 @@ namespace WEBCON.FormsGenerator.Test.BusinessLogic
         {
             var clientService = new Moq.Mock<IBpsClientCommandService>();
             var encoding = new Moq.Mock<IDataEncoding>();
-            Assert.Throws<ApplicationArgumentException>(() => { new BpsStartElementService(clientService.Object, null, encoding.Object, new FormFieldFactory(null,null)); }, "Data source instance has not been initialized.");
+            Assert.Throws<ApplicationArgumentException>(() => { new BpsStartElementService(clientService.Object, null, encoding.Object, new FormFieldFactory(null,null), new Moq.Mock<ILogger<BpsStartElementService>>().Object); }, "Data source instance has not been initialized.");
         }
         [Test]
         public void ShouldNotStartElementBecauseFieldsNotProvided()
@@ -91,7 +92,7 @@ namespace WEBCON.FormsGenerator.Test.BusinessLogic
             var clientService = new Moq.Mock<IBpsClientCommandService>();     
             var encoding = new Moq.Mock<IDataEncoding>();
             var dbMoq = new Moq.Mock<IFormUnitOfWork>();
-            BpsStartElementService bpsFormService = new BpsStartElementService(clientService.Object, dbMoq.Object, encoding.Object, new FormFieldFactory(null,null));
+            BpsStartElementService bpsFormService = new BpsStartElementService(clientService.Object, dbMoq.Object, encoding.Object, new FormFieldFactory(null,null),new Moq.Mock<ILogger<BpsStartElementService>>().Object);
             Assert.Throws<ApplicationArgumentException>(() => bpsFormService.Start(null, Guid.NewGuid()), "Form fields has not been provided. Could not start element.");
         }
         [Test]
@@ -100,7 +101,7 @@ namespace WEBCON.FormsGenerator.Test.BusinessLogic
             var clientService = new Moq.Mock<IBpsClientCommandService>();
             var encoding = new Moq.Mock<IDataEncoding>();
             var dbMoq = new Moq.Mock<IFormUnitOfWork>();
-            BpsStartElementService bpsFormService = new BpsStartElementService(clientService.Object, dbMoq.Object, encoding.Object, new FormFieldFactory(null,null));
+            BpsStartElementService bpsFormService = new BpsStartElementService(clientService.Object, dbMoq.Object, encoding.Object, new FormFieldFactory(null,null), new Moq.Mock<ILogger<BpsStartElementService>>().Object);
             Assert.Throws<ApplicationArgumentException>(() => bpsFormService.Start(new List<KeyValuePair<Guid, object>>{
                 new KeyValuePair<Guid, object>(Guid.NewGuid(), "2020-05-05") }, Guid.Empty), "Form guid has not been provided.");
         }
@@ -112,7 +113,7 @@ namespace WEBCON.FormsGenerator.Test.BusinessLogic
             var dbMoq = new Moq.Mock<IFormUnitOfWork>();
             var formR = new Moq.Mock<IFormRepository>();
             dbMoq.Setup(x => x.Forms).Returns(formR.Object);
-            BpsStartElementService bpsFormService = new BpsStartElementService(clientService.Object, dbMoq.Object, encoding.Object, new FormFieldFactory(null,null));
+            BpsStartElementService bpsFormService = new BpsStartElementService(clientService.Object, dbMoq.Object, encoding.Object, new FormFieldFactory(null,null), new Moq.Mock<ILogger<BpsStartElementService>>().Object);
             Assert.Throws<FormNotFoundException>(() => bpsFormService.Start(new List<KeyValuePair<Guid, object>>{
                 new KeyValuePair<Guid, object>(Guid.NewGuid(), "2020-05-05") }, Guid.NewGuid()), "Could not find form with specified guid.");
         }
@@ -133,7 +134,7 @@ namespace WEBCON.FormsGenerator.Test.BusinessLogic
             formR.Setup(x => x.FirstOrDefault(It.IsAny<Expression<Func<WEBCON.FormsGenerator.BusinessLogic.Domain.Model.Form, bool>>>())).Returns(moqForm);
             dbMoq.Setup(x => x.BpsFormFields).Returns(fieldsR.Object);
             dbMoq.Setup(x => x.Forms).Returns(formR.Object);
-            BpsStartElementService bpsFormService = new BpsStartElementService(clientService.Object, dbMoq.Object, null, new FormFieldFactory(new BpsFormFieldBuilder(),new HtmlFormValueBuilder()));
+            BpsStartElementService bpsFormService = new BpsStartElementService(clientService.Object, dbMoq.Object, null, new FormFieldFactory(new BpsFormFieldBuilder(),new HtmlFormValueBuilder()), new Moq.Mock<ILogger<BpsStartElementService>>().Object);
             Assert.Throws<ApplicationArgumentException>(() => bpsFormService.Start(new List<KeyValuePair<Guid, object>>{
                 new KeyValuePair<Guid, object>(fieldGuid, "2020-05-05") }, Guid.NewGuid()), "Could not start element because could not retrive user credendials."); ;
         }

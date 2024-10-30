@@ -15,7 +15,7 @@ namespace WEBCON.FormsGenerator.BusinessLogic.Domain.Model
             Type = type;
             BPSFormType = formType;
         }
-        public FormFieldType Type { get; protected set; }
+        public FormFieldType Type { get; set; }
         public bool IsRequired { get; set; }
         public bool IsReadonly { get; set; }
         public virtual BpsFormType BPSFormType { get; protected set; }
@@ -32,6 +32,7 @@ namespace WEBCON.FormsGenerator.BusinessLogic.Domain.Model
             if (type == FormFieldType.Undefined)
                 throw new BpsEntityArgumentException("Cannot add field with an undefined type");
 
+            Type = type;
             SetName(name);
         }
     }
