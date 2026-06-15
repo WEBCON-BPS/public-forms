@@ -62,8 +62,15 @@ namespace WEBCON.FormsGenerator.Test.BusinessLogic
             dbMoq.Setup(x => x.Forms).Returns(formR.Object);
             var encoding = new Moq.Mock<IDataEncoding>();
 
-            clientService.Setup(x => x.StartElement(It.IsAny<IEnumerable<FormsGenerator.BusinessLogic.Application.DTO.FormField>>(), It.IsAny<Guid>(), It.IsAny<Guid>(), It.IsAny<Guid>(), It.IsAny<Guid>(), new Moq.Mock<ILogger>().Object, null))
-                .Returns(Task.FromResult(new StartElementResult { Id = 1212, Number = "P/124", Status = "MovedToTheNextStep" }));
+            clientService.Setup(x => x.StartElement(
+    It.IsAny<IEnumerable<FormsGenerator.BusinessLogic.Application.DTO.FormField>>(),
+    It.IsAny<Guid>(),
+    It.IsAny<Guid>(),
+    It.IsAny<Guid>(),
+    It.IsAny<Guid>(),
+    It.IsAny<ILogger>(),
+    It.Is<Credentials>(c => c == null)))
+    .Returns(Task.FromResult(new StartElementResult { Id = 1212, Number = "P/124", Status = "MovedToTheNextStep" }));
             BpsStartElementService bpsFormService = new BpsStartElementService(clientService.Object, dbMoq.Object, encoding.Object, new FormFieldFactory(new BpsFormFieldBuilder(),new HtmlFormValueBuilder()), new Moq.Mock<ILogger<BpsStartElementService>>().Object);
             var result = await bpsFormService.Start(new List<KeyValuePair<Guid, object>>
             { new KeyValuePair<Guid,object>(dateGuid,"2020-05-05") ,

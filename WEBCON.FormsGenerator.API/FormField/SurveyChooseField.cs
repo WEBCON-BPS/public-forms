@@ -18,7 +18,7 @@ namespace WEBCON.FormsGenerator.API.FormField
         public override object ValueToBps()
         {
             if (!(Value.Value is IEnumerable<ChoiceValue> result)) return Value.Value;
-            return new StartElementValueChoices() { choices = result.Select(x => new StartElementValueChoice { id = x.Id, name = x.Name }).ToArray() };
+            return result.Select(x => new StartElementValueChoice { id = x.Id, name = x.Name }).ToArray();
         }
     }
 }

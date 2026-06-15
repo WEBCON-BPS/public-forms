@@ -41,6 +41,9 @@ namespace WEBCON.FormsGenerator.Test.BusinessLogic
             value = new HtmlChoiceListValue("125#Option#1");
             Assert.IsTrue(value.Value is List<ChoiceValue> result5 && result5.First().Id == "125" && result5.First().Name == "Option#1");
 
+            value = new HtmlChoiceListValue("1-test#Option#-1");
+            Assert.IsTrue(value.Value is List<ChoiceValue> result6 && result6.First().Id == "1-test" && result6.First().Name == "Option#-1");
+
         }
         [Test]
         public void ShouldReturnDateValue()

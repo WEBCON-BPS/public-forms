@@ -73,8 +73,11 @@ namespace WEBCON.FormsGenerator.Test.Presentation
         private AccountController GetController()
         {
             var configurationMock = new Mock<IReadOnlyConfiguration>();
-            configurationMock.Setup(c => c.ApiSettings.ClientId).Returns("login");
-            configurationMock.Setup(c => c.ApiSettings.ClientSecret).Returns("pass");
+            configurationMock.Setup(c => c.AdditionalSettings).Returns(new AdditionalSettings
+            {
+                Login = "login",
+                Password = "password"
+            });
 
             var asMoq = new Mock<IAuthenticationService>();
             asMoq.Setup(_ => _.SignInAsync(It.IsAny<HttpContext>(), It.IsAny<string>(), It.IsAny<ClaimsPrincipal>(), It.IsAny<AuthenticationProperties>()))
