@@ -18,10 +18,7 @@
     {
         public object value { get; set; }
     }
-    internal class StartElementValueChoices
-    {
-        public StartElementValueChoice[] choices { get; set; }
-    }
+
     internal class StartElementValueChoice
     {
         public string id { get; set; }

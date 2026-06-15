@@ -21,9 +21,7 @@ namespace WEBCON.FormsGenerator.Test.Presentation
                 .Returns(Task.FromResult("token"));
 
             var configMock = new Mock<IReadOnlyConfiguration>();
-            configMock.Setup(c => c.ApiSettings.Url).Returns("http://test");
-            configMock.Setup(c => c.ApiSettings.ClientId).Returns("login");
-            configMock.Setup(c => c.ApiSettings.ClientSecret).Returns("pass");
+            configMock.Setup(c => c.ApiSettings).Returns(new ApiSettings { Url = "http://test", ClientId = "login", ClientSecret = "pass" });
 
             BpsCheckConnectionService formCheck = new BpsCheckConnectionService(moq.Object);
 
@@ -34,8 +32,8 @@ namespace WEBCON.FormsGenerator.Test.Presentation
             Assert.IsNotNull(checkResult);
             Assert.AreEqual(true, checkResult.IsConnected);
             Assert.AreEqual("Connected", checkResult.ResultMessage);
-
         }
+
         [Test]
         public async Task ShouldThrowUnauthorizedWhenCheckConnection()
         {
@@ -44,9 +42,7 @@ namespace WEBCON.FormsGenerator.Test.Presentation
                 .Throws(new Exception("Unauthorized"));
 
             var configMock = new Mock<IReadOnlyConfiguration>();
-            configMock.Setup(c => c.ApiSettings.Url).Returns("http://test");
-            configMock.Setup(c => c.ApiSettings.ClientId).Returns("login");
-            configMock.Setup(c => c.ApiSettings.ClientSecret).Returns("pass");
+            configMock.Setup(c => c.ApiSettings).Returns(new ApiSettings { Url = "http://test", ClientId = "login", ClientSecret = "pass" });
 
             BpsCheckConnectionService formCheck = new BpsCheckConnectionService(moq.Object);
 
@@ -58,15 +54,14 @@ namespace WEBCON.FormsGenerator.Test.Presentation
             Assert.AreEqual(false, checkResult.IsConnected);
             Assert.AreEqual("Unauthorized", checkResult.ResultMessage);
         }
+
         [Test]
         public async Task ShouldThrowLoginDataNotPassedWhenCheckConnection()
         {
             var moq = new Moq.Mock<IBpsClientCheckConnection>();
 
             var configMock = new Mock<IReadOnlyConfiguration>();
-            configMock.Setup(c => c.ApiSettings.Url).Returns("");
-            configMock.Setup(c => c.ApiSettings.ClientId).Returns("");
-            configMock.Setup(c => c.ApiSettings.ClientSecret).Returns("");
+            configMock.Setup(c => c.ApiSettings).Returns(new ApiSettings { Url = "", ClientId = "", ClientSecret = "" });
 
             BpsCheckConnectionService formCheck = new BpsCheckConnectionService(moq.Object);
             BpsCheckConnectionController configuration = new BpsCheckConnectionController(formCheck, null, configMock.Object);

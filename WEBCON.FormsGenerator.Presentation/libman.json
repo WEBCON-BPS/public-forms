@@ -3,7 +3,7 @@
   "defaultProvider": "cdnjs",
   "libraries": [
     {
-      "provider": "unpkg",
+      "provider": "jsdelivr",
       "library": "bootstrap@5.3.3",
       "destination": "wwwroot/lib/bootstrap/",
       "files": [
@@ -30,7 +30,7 @@
       ]
     },
     {
-      "provider": "unpkg",
+      "provider": "jsdelivr",
       "library": "@fortawesome/fontawesome-free@5.15.2",
       "destination": "wwwroot/lib/fontawesome/",
       "files": [

@@ -1,10 +1,13 @@
 ﻿using NUnit.Framework;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using WEBCON.FormsGenerator.API.ApiModels;
 using WEBCON.FormsGenerator.API.FormField;
 using WEBCON.FormsGenerator.API.FormField.Value;
 using WEBCON.FormsGenerator.BusinessLogic.Application.Html.FormField.Value;
 using WEBCON.FormsGenerator.BusinessLogic.Domain.Exceptions;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace WEBCON.FormsGenerator.Test.API
 {
@@ -79,12 +82,12 @@ namespace WEBCON.FormsGenerator.Test.API
         public void ShouldReturnValueToBpsForSurveyChooseList()
         {
             SurveyChooseField field = new SurveyChooseField(new HtmlSurveyChooseValue("1#Źle,3#Prawidłowo"));
-            var result = field.ValueToBps() as StartElementValueChoices;
+            var result = (field.ValueToBps() as IEnumerable<StartElementValueChoice>).ToArray();
             Assert.IsNotNull(result);
-            Assert.AreEqual("1", result.choices[0].id);
-            Assert.AreEqual("Źle", result.choices[0].name);
-            Assert.AreEqual("3", result.choices[1].id);
-            Assert.AreEqual("Prawidłowo", result.choices[1].name);
+            Assert.AreEqual("1", result[0].id);
+            Assert.AreEqual("Źle", result[0].name);
+            Assert.AreEqual("3", result[1].id);
+            Assert.AreEqual("Prawidłowo", result[1].name);
         }
         [Test]
         public void ShouldReturnValueToBpsForRatingScale()
